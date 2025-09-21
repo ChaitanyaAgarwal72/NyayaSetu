@@ -1,1 +1,162 @@
+NyayaSetu Database Schema Documentation
 
+This document provides details of the NyayaSetu database schema created in MySQL and hosted on Railway Platform.
+It explains the purpose of each table, its fields, constraints, and relationships.
+
+⚖️ 1. Lawyers Table (lawyers)
+
+Purpose: Stores information about registered lawyers using the platform.
+
+Schema:
+
+lawyer_id → INT (Primary Key, Auto Increment)
+
+name → VARCHAR(255) (Lawyer’s full name, required)
+
+gender → VARCHAR(10) (Allowed: Male, Female, Other)
+
+email → VARCHAR(255) (Unique, required)
+
+advocate_no → VARCHAR(100) (Unique advocate registration number)
+
+password → VARCHAR(255) (Encrypted password)
+
+mobile_no → VARCHAR(20) (Contact number)
+
+dob → DATE (Date of birth)
+
+address → TEXT (Optional)
+
+city → VARCHAR(100)
+
+state → VARCHAR(100)
+
+created_at → TIMESTAMP (Default: current time)
+
+updated_at → TIMESTAMP (Auto-updated on record changes)
+
+👥 2. Clients Table (clients)
+
+Purpose: Stores details of clients represented by lawyers.
+
+Schema:
+
+client_id → INT (Primary Key, Auto Increment)
+
+lawyer_id → INT (Foreign Key → lawyers.lawyer_id)
+
+name → VARCHAR(255) (Client’s full name, required)
+
+gender → VARCHAR(10) (Allowed: Male, Female, Other)
+
+email → VARCHAR(255) (Unique, required)
+
+mobile_no → VARCHAR(20)
+
+dob → DATE
+
+address → TEXT (Optional)
+
+city → VARCHAR(100)
+
+state → VARCHAR(100)
+
+language → VARCHAR(100) (Preferred communication language)
+
+created_at → TIMESTAMP
+
+updated_at → TIMESTAMP
+
+Relationships:
+
+Each client belongs to exactly one lawyer (fk_client_lawyer).
+
+📑 3. Cases Table (cases)
+
+Purpose: Stores details of all legal cases filed by lawyers on behalf of their clients.
+
+Schema:
+
+case_id → INT (Primary Key, Auto Increment)
+
+lawyer_id → INT (Foreign Key → lawyers.lawyer_id)
+
+client_id → INT (Foreign Key → clients.client_id)
+
+case_number → VARCHAR(100) (Unique case number)
+
+case_title → VARCHAR(255) (Title/subject of the case)
+
+court_name → VARCHAR(255) (Court handling the case)
+
+case_type → VARCHAR(100) (Type of case: civil, criminal, etc.)
+
+filing_date → DATE
+
+status → VARCHAR(50) (Default: Pending)
+
+Allowed values:
+
+Pending – Case filed but not yet heard
+
+Ongoing – Case under trial/hearings
+
+Reserved for Judgment – Awaiting decision
+
+Disposed – Judgment given
+
+Appeal Filed – Appeal submitted
+
+Closed – Fully closed
+
+description → TEXT (Details about the case)
+
+created_at → TIMESTAMP
+
+updated_at → TIMESTAMP
+
+Relationships:
+
+Each case is linked to one lawyer and one client.
+
+🏛️ 4. Case Hearings Table (case_hearings)
+
+Purpose: Stores hearing details and documents for each case.
+
+Schema:
+
+hearing_id → INT (Primary Key, Auto Increment)
+
+case_number → VARCHAR(100) (Foreign Key → cases.case_number)
+
+hearing_name → VARCHAR(255) (Label or name of hearing, e.g., "First Hearing")
+
+hearing_pdf → LONGBLOB (Stores hearing document in PDF format)
+
+created_at → TIMESTAMP
+
+updated_at → TIMESTAMP
+
+🔐 5. OTP Verification Table (otp_verifications)
+
+Purpose: Handles email-based OTP authentication for lawyers.
+
+Schema:
+
+id → INT (Primary Key, Auto Increment)
+
+email → VARCHAR(255) (Foreign Key → lawyers.email)
+
+otp → VARCHAR(6) (One-Time Password)
+
+created_at → TIMESTAMP
+
+expires_at → TIMESTAMP (Expiry time for OTP)
+
+is_used → BOOLEAN (Default: FALSE)
+
+Indexes:
+
+idx_email_otp → For quick lookup of OTP by email
+
+idx_expires → For expiring old OTPs efficiently
