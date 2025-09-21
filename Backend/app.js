@@ -7,8 +7,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 //Routs
 const adminRoutes = require("./routes/admin.routes");
+const lawyerRoutes = require("./routes/lawyer.routes");
 //admin Routes
 app.use("/nyayasetu/api/admins", adminRoutes);
+//Lawyer Routes
+app.use("/nyayasetu/api/lawyers", lawyerRoutes);
 // app.use(cors({
 //   origin: 'http://localhost:3000',  // frontend URL
 //   methods: ['GET', 'POST', 'PUT', 'DELETE'],
