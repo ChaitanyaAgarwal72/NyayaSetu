@@ -6,6 +6,9 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 //Routs
+const adminRoutes = require("./routes/admin.routes");
+//admin Routes
+app.use("/nyayasetu/api/admins", adminRoutes);
 // app.use(cors({
 //   origin: 'http://localhost:3000',  // frontend URL
 //   methods: ['GET', 'POST', 'PUT', 'DELETE'],
