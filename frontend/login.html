@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - NyayaSetu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --navy: #0A2647;
+            --gold: #FFB100;
+            --light-blue: #205295;
+            --white: #FFFFFF;
+            --transition-speed: 0.3s;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--navy);
+            background: url('assest/loginbg.jpg') center/cover no-repeat;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(10, 38, 71, 0.60), rgba(32, 82, 149, 0.50));
+            z-index: 0;
+        }
+
+        .login-container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .login-container {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+            width: 100%;
+            max-width: 420px;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-header img {
+            height: 100px;
+            width: auto;
+            margin-bottom: 2rem;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .login-title {
+            color: var(--navy);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .login-subtitle {
+            color: var(--light-blue);
+            font-size: 0.95rem;
+        }
+
+        .login-subtitle a {
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color var(--transition-speed) ease;
+        }
+
+        .login-subtitle a:hover {
+            color: #e59f00;
+        }
+
+
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid rgba(32, 82, 149, 0.2);
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .form-input:focus {
+            border-color: var(--gold);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 177, 0, 0.1);
+        }
+
+        .password-field {
+            position: relative;
+            width: 100%;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: var(--light-blue);
+            opacity: 0.7;
+            transition: opacity var(--transition-speed) ease;
+            z-index: 1;
+        }
+
+        .toggle-password:hover {
+            opacity: 1;
+        }
+
+        .form-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--light-blue);
+            font-size: 0.9rem;
+        }
+
+        .forgot-password {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color var(--transition-speed) ease;
+        }
+
+        .forgot-password:hover {
+            color: #e59f00;
+        }
+
+        .login-button {
+            background: var(--gold);
+            color: var(--navy);
+            padding: 1rem;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            font-size: 1rem;
+        }
+
+        .login-button:hover {
+            background: #e59f00;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 177, 0, 0.2);
+        }
+
+        .error-message {
+            display: none;
+            color: #dc3545;
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+        }
+
+        .form-input.error {
+            border-color: #dc3545;
+        }
+
+        .form-input.valid {
+            border-color: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <img src="assest/logo.png" alt="NyayaSetu Logo">
+            <h1 class="login-title">Login to your account</h1>
+            <p class="login-subtitle">Don't have an account? <a href="signup.html">Sign Up Free!</a></p>
+        </div>
+
+
+
+        <form class="login-form" id="loginForm" novalidate>
+            <div class="form-group">
+                <input type="email" class="form-input" name="email" 
+                       placeholder="Email address" 
+                       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                       required
+                       title="Please enter a valid email address">
+                <small class="error-message"></small>
+            </div>
+            <div class="form-group">
+                <div class="password-field">
+                    <input type="password" class="form-input" name="password" 
+                           placeholder="Password" 
+                           required
+                           minlength="8"
+                           title="Please enter your password">
+                    <i class="far fa-eye toggle-password"></i>
+                </div>
+                <small class="error-message"></small>
+            </div>
+            <div class="form-footer">
+                <label class="remember-me">
+                    <input type="checkbox" name="remember">
+                    Remember me
+                </label>
+                <a href="#" class="forgot-password">Forgot password?</a>
+            </div>
+            <button type="submit" class="login-button">Login with email</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('loginForm');
+            const inputs = form.querySelectorAll('input[type="email"], input[type="password"]');
+            const togglePassword = document.querySelector('.toggle-password');
+            const passwordInput = document.querySelector('input[type="password"]');
+
+            // Password visibility toggle
+            if (togglePassword && passwordInput) {
+                togglePassword.addEventListener('click', function() {
+                    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                    passwordInput.setAttribute('type', type);
+                    this.classList.toggle('fa-eye');
+                    this.classList.toggle('fa-eye-slash');
+                });
+            }
+
+            // Input validation
+            function validateInput(input) {
+                const errorElement = input.nextElementSibling;
+                let isValid = true;
+                let errorMessage = '';
+
+                // Clear previous validation
+                input.classList.remove('error', 'valid');
+                if (errorElement && errorElement.classList.contains('error-message')) {
+                    errorElement.style.display = 'none';
+                }
+
+                if (input.required && !input.value) {
+                    isValid = false;
+                    errorMessage = 'This field is required';
+                } else if (input.type === 'email' && input.value) {
+                    const emailRegex = new RegExp(input.pattern);
+                    if (!emailRegex.test(input.value)) {
+                        isValid = false;
+                        errorMessage = 'Please enter a valid email address';
+                    }
+                } else if (input.type === 'password' && input.value) {
+                    if (input.value.length < 8) {
+                        isValid = false;
+                        errorMessage = 'Password must be at least 8 characters long';
+                    }
+                }
+
+                if (!isValid) {
+                    input.classList.add('error');
+                    if (errorElement && errorElement.classList.contains('error-message')) {
+                        errorElement.textContent = errorMessage;
+                        errorElement.style.display = 'block';
+                    }
+                } else {
+                    input.classList.add('valid');
+                }
+
+                return isValid;
+            }
+
+            // Real-time validation
+            inputs.forEach(input => {
+                input.addEventListener('input', () => validateInput(input));
+                input.addEventListener('blur', () => validateInput(input));
+            });
+
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                let isFormValid = true;
+
+                inputs.forEach(input => {
+                    if (!validateInput(input)) {
+                        isFormValid = false;
+                    }
+                });
+
+                if (isFormValid) {
+                    // Get form data
+                    const email = form.querySelector('input[name="email"]').value;
+                    const password = form.querySelector('input[name="password"]').value;
+                    const rememberMe = form.querySelector('input[name="remember"]')?.checked || false;
+                    
+                    // Prepare login data
+                    const loginData = {
+                        email: email,
+                        password: password
+                    };
+                    
+                    // Show loading state
+                    const submitButton = form.querySelector('button[type="submit"]');
+                    const originalButtonText = submitButton.textContent;
+                    submitButton.disabled = true;
+                    submitButton.textContent = 'Logging in...';
+                    
+                    // Log the request details for debugging
+                    console.log('Sending login request with:', loginData);
+                    
+                    // Send login request to backend API
+                    fetch('https://backendtemp-h9yg.onrender.com/nyayasetu/api/admins/login', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(loginData)
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            return response.json().then(errorData => {
+                                throw new Error(errorData.message || 'Login failed. Please check your credentials.');
+                            });
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        // Log the response for debugging
+                        console.log('Login response:', data);
+                        
+                        // Check for token in different possible locations in the response
+                        let token = null;
+                        let userData = null;
+                        
+                        // Option 1: Direct token property
+                        if (data.token) {
+                            token = data.token;
+                            userData = data.user || data.userData || data;
+                        } 
+                        // Option 2: Nested in data property
+                        else if (data.data && data.data.token) {
+                            token = data.data.token;
+                            userData = data.data.user || data.data.userData || data.data;
+                        }
+                        // Option 3: Authorization header format
+                        else if (data.authorization || data.Authorization) {
+                            token = (data.authorization || data.Authorization).replace('Bearer ', '');
+                            userData = data.user || data.userData || data;
+                        }
+                        // Option 4: Access token format
+                        else if (data.access_token || data.accessToken) {
+                            token = data.access_token || data.accessToken;
+                            userData = data.user || data.userData || data;
+                        }
+                        
+                        // If we found a token, proceed with login
+                        if (token) {
+                            // Store the token securely
+                            localStorage.setItem('nyayasetu_token', token);
+                            
+                            // Store user data if we have it
+                            if (userData) {
+                                // Log what we're storing
+                                console.log('Storing user data in localStorage:', userData);
+                                
+                                // Find the name field for debugging purposes
+                                const possibleNameFields = ['name', 'fullName', 'username', 'email'];
+                                possibleNameFields.forEach(field => {
+                                    if (userData[field]) {
+                                        console.log(`Found user identifier in field '${field}': ${userData[field]}`);
+                                    }
+                                });
+                                
+                                localStorage.setItem('nyayasetu_user', JSON.stringify(userData));
+                            }
+                            
+                            // Redirect to dashboard
+                            window.location.href = 'dashboard.html';
+                        } else {
+                            // If we couldn't find a token, show the full response for debugging
+                            console.error('No token found in response:', data);
+                            alert('Login successful but could not find authentication token in the response. Please check console and contact support.');
+                        }
+                    })
+                    .catch(error => {
+                        // Show error message
+                        alert(error.message || 'Login failed. Please check your credentials.');
+                        console.error('Error:', error);
+                    })
+                    .finally(() => {
+                        // Reset button state
+                        submitButton.disabled = false;
+                        submitButton.textContent = originalButtonText;
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

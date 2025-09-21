@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - NyayaSetu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --navy: #0A2647;
+            --gold: #FFB100;
+            --light-blue: #205295;
+            --white: #FFFFFF;
+            --transition-speed: 0.3s;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--navy);
+            background: url('assest/loginbg.jpg') center/cover no-repeat;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 2rem;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(10, 38, 71, 0.60), rgba(32, 82, 149, 0.50));
+            z-index: 0;
+        }
+
+        .signup-container {
+            position: relative;
+            z-index: 1;
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+            width: 100%;
+            max-width: 600px;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .signup-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .signup-header img {
+            height: 100px;
+            width: auto;
+            margin-bottom: 2rem;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .signup-title {
+            color: var(--navy);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .signup-subtitle {
+            color: var(--light-blue);
+            font-size: 0.95rem;
+        }
+
+        .signup-subtitle a {
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color var(--transition-speed) ease;
+        }
+
+        .signup-subtitle a:hover {
+            color: #e59f00;
+        }
+
+        .signup-form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.2rem;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--navy);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid rgba(32, 82, 149, 0.2);
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .form-input:focus {
+            border-color: var(--gold);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 177, 0, 0.1);
+        }
+
+        .password-field {
+            position: relative;
+            width: 100%;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: var(--light-blue);
+            opacity: 0.7;
+            transition: opacity var(--transition-speed) ease;
+            z-index: 1;
+        }
+
+        .toggle-password:hover {
+            opacity: 1;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid rgba(32, 82, 149, 0.2);
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            transition: all var(--transition-speed) ease;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        .form-select:focus {
+            border-color: var(--gold);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 177, 0, 0.1);
+        }
+
+        .signup-button {
+            background: var(--gold);
+            color: var(--navy);
+            padding: 1rem;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            font-size: 1rem;
+            grid-column: span 2;
+            margin-top: 1rem;
+        }
+
+        .signup-button:hover {
+            background: #e59f00;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 177, 0, 0.2);
+        }
+
+        .error-message {
+            display: none;
+            color: #dc3545;
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+        }
+
+        .form-input.error {
+            border-color: #dc3545;
+        }
+
+        .form-input.valid {
+            border-color: #28a745;
+        }
+
+        .password-strength-meter {
+            margin-top: 0.5rem;
+        }
+
+        .strength-bar {
+            height: 4px;
+            border-radius: 2px;
+            margin-bottom: 0.25rem;
+            transition: all 0.3s ease;
+        }
+
+        .strength-text {
+            font-size: 0.85rem;
+            color: var(--light-blue);
+        }
+
+        /* Password strength colors */
+        .strength-weak .strength-bar {
+            width: 25%;
+            background-color: #dc3545;
+        }
+
+        .strength-medium .strength-bar {
+            width: 50%;
+            background-color: #ffc107;
+        }
+
+        .strength-strong .strength-bar {
+            width: 75%;
+            background-color: #28a745;
+        }
+
+        .strength-very-strong .strength-bar {
+            width: 100%;
+            background-color: #20c997;
+        }
+
+        @media (max-width: 768px) {
+            .signup-form {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full-width {
+                grid-column: span 1;
+            }
+
+            .signup-button {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <div class="signup-header">
+            <img src="assest/logo.png" alt="NyayaSetu Logo">
+            <h1 class="signup-title">Create your account</h1>
+            <p class="signup-subtitle">Already have an account? <a href="login.html">Login here</a></p>
+        </div>
+
+        <form class="signup-form" id="signupForm" novalidate>
+            <!-- Personal Information -->
+            <div class="form-group">
+                <label class="form-label">Name</label>
+                <input type="text" class="form-input" name="name" placeholder="Enter your full name" 
+                       pattern="^[A-Za-z\s]{3,50}$" 
+                       required
+                       minlength="3"
+                       maxlength="50"
+                       title="Name should be 3-50 characters long and contain only letters">
+                <small class="error-message"></small>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Gender</label>
+                <select class="form-select" name="gender" required>
+                    <option value="">Select gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+                <small class="error-message"></small>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-input" name="email" 
+                       placeholder="Enter your email"
+                       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                       required
+                       title="Please enter a valid email address">
+                <small class="error-message"></small>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Mobile Number</label>
+                <input type="tel" class="form-input" name="mobile_no" 
+                       placeholder="Enter your mobile number" 
+                       pattern="[6-9][0-9]{9}"
+                       required
+                       title="Please enter a valid 10-digit Indian mobile number">
+                <small class="error-message"></small>
+            </div>
+
+            <!-- Professional Information -->
+            <div class="form-group">
+                <label class="form-label">Advocate Number</label>
+                <input type="text" class="form-input" name="advocate_no" 
+                       placeholder="Enter your advocate number"
+                       pattern="^[A-Z]{2}[0-9]{6}$"
+                       required
+                       title="Please enter a valid advocate number (e.g., AB123456)">
+                <small class="error-message"></small>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Date of Birth</label>
+                <input type="date" class="form-input" name="dob" 
+                       required
+                       max="2005-12-31"
+                       title="You must be at least 18 years old">
+                <small class="error-message"></small>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Password</label>
+                <div class="password-field">
+                    <input type="password" class="form-input" name="password" 
+                           placeholder="Create a password"
+                           pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                           required
+                           minlength="8"
+                           title="Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character">
+                    <i class="far fa-eye toggle-password"></i>
+                </div>
+                <small class="error-message"></small>
+                <div class="password-strength-meter" style="display: none;">
+                    <div class="strength-bar"></div>
+                    <small class="strength-text"></small>
+                </div>
+            </div>
+
+            <!-- Address Information -->
+            <div class="form-group full-width">
+                <label class="form-label">Address</label>
+                <input type="text" class="form-input" name="address" 
+                       placeholder="Enter your complete address"
+                       minlength="10"
+                       maxlength="200">
+                <small class="error-message"></small>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">City</label>
+                <input type="text" class="form-input" name="city" 
+                       placeholder="Enter your city"
+                       pattern="^[A-Za-z\s]{2,50}$"
+                       title="City name should contain only letters">
+                <small class="error-message"></small>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">State</label>
+                <select class="form-select" name="state" required>
+                    <option value="">Select state</option>
+                    <option value="AP">Andhra Pradesh</option>
+                    <option value="AR">Arunachal Pradesh</option>
+                    <option value="AS">Assam</option>
+                    <option value="BR">Bihar</option>
+                    <option value="CG">Chhattisgarh</option>
+                    <option value="GA">Goa</option>
+                    <option value="GJ">Gujarat</option>
+                    <option value="HR">Haryana</option>
+                    <option value="HP">Himachal Pradesh</option>
+                    <option value="JH">Jharkhand</option>
+                    <option value="KA">Karnataka</option>
+                    <option value="KL">Kerala</option>
+                    <option value="MP">Madhya Pradesh</option>
+                    <option value="MH">Maharashtra</option>
+                    <option value="MN">Manipur</option>
+                    <option value="ML">Meghalaya</option>
+                    <option value="MZ">Mizoram</option>
+                    <option value="NL">Nagaland</option>
+                    <option value="OR">Odisha</option>
+                    <option value="PB">Punjab</option>
+                    <option value="RJ">Rajasthan</option>
+                    <option value="SK">Sikkim</option>
+                    <option value="TN">Tamil Nadu</option>
+                    <option value="TG">Telangana</option>
+                    <option value="TR">Tripura</option>
+                    <option value="UP">Uttar Pradesh</option>
+                    <option value="UK">Uttarakhand</option>
+                    <option value="WB">West Bengal</option>
+                </select>
+            </div>
+
+            <button type="submit" class="signup-button">Create Account</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('signupForm');
+            const inputs = form.querySelectorAll('input, select');
+            const passwordInput = form.querySelector('input[name="password"]');
+            const togglePassword = document.querySelector('.toggle-password');
+            const passwordStrengthMeter = document.querySelector('.password-strength-meter');
+            const strengthBar = document.querySelector('.strength-bar');
+            const strengthText = document.querySelector('.strength-text');
+
+            // Password visibility toggle
+            if (togglePassword && passwordInput) {
+                togglePassword.addEventListener('click', function() {
+                    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                    passwordInput.setAttribute('type', type);
+                    this.classList.toggle('fa-eye');
+                    this.classList.toggle('fa-eye-slash');
+                });
+            }
+
+            // Password strength meter
+            function checkPasswordStrength(password) {
+                let strength = 0;
+                const checks = {
+                    length: password.length >= 8,
+                    lowercase: /[a-z]/.test(password),
+                    uppercase: /[A-Z]/.test(password),
+                    numbers: /\d/.test(password),
+                    special: /[^A-Za-z0-9]/.test(password)
+                };
+
+                strength += Object.values(checks).filter(Boolean).length;
+
+                const strengthClasses = [
+                    'strength-weak',
+                    'strength-medium',
+                    'strength-strong',
+                    'strength-very-strong'
+                ];
+
+                const strengthTexts = [
+                    'Weak',
+                    'Medium',
+                    'Strong',
+                    'Very Strong'
+                ];
+
+                passwordStrengthMeter.style.display = password ? 'block' : 'none';
+                passwordStrengthMeter.className = 'password-strength-meter ' + 
+                    (strength > 0 ? strengthClasses[strength - 1] : '');
+                strengthText.textContent = password ? strengthTexts[strength - 1] : '';
+            }
+
+            // Input validation
+            function validateInput(input) {
+                const errorElement = input.nextElementSibling;
+                let isValid = true;
+                let errorMessage = '';
+
+                // Clear previous validation
+                input.classList.remove('error', 'valid');
+                if (errorElement && errorElement.classList.contains('error-message')) {
+                    errorElement.style.display = 'none';
+                }
+
+                if (input.required && !input.value) {
+                    isValid = false;
+                    errorMessage = 'This field is required';
+                } else if (input.pattern && input.value) {
+                    const regex = new RegExp(input.pattern);
+                    if (!regex.test(input.value)) {
+                        isValid = false;
+                        errorMessage = input.title || 'Please enter a valid value';
+                    }
+                } else if (input.type === 'date' && input.value) {
+                    const selectedDate = new Date(input.value);
+                    const maxDate = new Date(input.max);
+                    if (maxDate && selectedDate > maxDate) {
+                        isValid = false;
+                        errorMessage = 'You must be at least 18 years old';
+                    }
+                }
+
+                if (!isValid) {
+                    input.classList.add('error');
+                    if (errorElement && errorElement.classList.contains('error-message')) {
+                        errorElement.textContent = errorMessage;
+                        errorElement.style.display = 'block';
+                    }
+                } else {
+                    input.classList.add('valid');
+                }
+
+                return isValid;
+            }
+
+            // Real-time validation
+            inputs.forEach(input => {
+                input.addEventListener('input', () => {
+                    validateInput(input);
+                    if (input.type === 'password') {
+                        checkPasswordStrength(input.value);
+                    }
+                });
+
+                input.addEventListener('blur', () => {
+                    validateInput(input);
+                });
+            });
+
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                let isFormValid = true;
+
+                inputs.forEach(input => {
+                    if (!validateInput(input)) {
+                        isFormValid = false;
+                    }
+                });
+
+                if (isFormValid) {
+                    // Get form data and convert to JSON
+                    const formData = new FormData(form);
+                    const userData = {};
+                    
+                    formData.forEach((value, key) => {
+                        userData[key] = value;
+                    });
+                    
+                    // Show loading state
+                    const submitButton = form.querySelector('button[type="submit"]');
+                    const originalButtonText = submitButton.textContent;
+                    submitButton.disabled = true;
+                    submitButton.textContent = 'Creating Account...';
+                    
+                    // Send data to backend API
+                    fetch('https://backendtemp-h9yg.onrender.com/nyayasetu/api/admins', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(userData)
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            return response.json().then(errorData => {
+                                throw new Error(errorData.message || 'Signup failed. Please try again.');
+                            });
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        // Success - redirect to login page
+                        alert('Account created successfully! Please log in.');
+                        window.location.href = 'login.html';
+                    })
+                    .catch(error => {
+                        // Show error message
+                        alert(error.message || 'Something went wrong. Please try again.');
+                        console.error('Error:', error);
+                    })
+                    .finally(() => {
+                        // Reset button state
+                        submitButton.disabled = false;
+                        submitButton.textContent = originalButtonText;
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

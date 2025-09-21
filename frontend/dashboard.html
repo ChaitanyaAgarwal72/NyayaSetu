@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - NyayaSetu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --navy: #0A2647;
+            --gold: #FFB100;
+            --light-blue: #205295;
+            --white: #FFFFFF;
+            --light-gray: #f8f9fa;
+            --navy-light: #1a3557;
+            --blue-soft: rgba(32, 82, 149, 0.1);
+            --gradient-bg: linear-gradient(135deg, #f8f9fa 0%, #e8f0f7 100%);
+            --transition-speed: 0.3s;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+            --shadow-gold: 0 4px 20px rgba(255, 177, 0, 0.3);
+            --shadow-navy: 0 8px 25px rgba(10, 38, 71, 0.2);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--navy);
+            background: var(--gradient-bg);
+            min-height: 100vh;
+            
+        }
+
+        /* Enhanced Header Styles */
+        .header {
+            background: var(--white);
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-sm);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(10, 38, 71, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
+        }
+
+        .logo-img {
+            height: 40px;
+            width: auto;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .nav-section {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-link {
+            color: var(--navy);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-sm);
+            transition: all var(--transition-speed) ease;
+            position: relative;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: var(--light-blue);
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -0.75rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 2px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--navy);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        .username {
+            font-weight: 600;
+            color: var(--navy);
+            margin-right: 1rem;
+        }
+        
+        .logout-btn {
+            background-color: transparent;
+            color: var(--navy);
+            border: 1px solid var(--navy);
+            padding: 0.4rem 0.8rem;
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+        }
+        
+        .logout-btn:hover {
+            background-color: var(--gold);
+            color: var(--navy);
+            border-color: var(--gold);
+            transform: translateY(-2px);
+        }
+        
+        .logout-btn i {
+            font-size: 0.9rem;
+        }
+
+        /* File Upload Button Styles */
+        .upload-btn {
+            background-color: var(--light-blue);
+            color: var(--white);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .upload-btn:hover {
+            background-color: var(--gold);
+            color: var(--navy);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-gold);
+        }
+        
+        .upload-btn i {
+            font-size: 1rem;
+        }
+
+        .upload-btn input[type="file"] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Enhanced Dashboard Title */
+        .dashboard-title {
+            text-align: center;
+            margin: 120px 0 60px;
+            color: var(--navy);
+            font-size: 2.5rem;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .dashboard-title::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--light-blue);
+            border-radius: 2px;
+        }
+
+        .dashboard-title::after {
+            content: '';
+            display: block;
+            width: 120px;
+            height: 4px;
+            background: var(--gold);
+            margin: 0.75rem auto;
+            border-radius: 2px;
+        }
+
+        /* Grid with Subtle Dividers */
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .dashboard-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, var(--light-blue), transparent);
+            opacity: 0.3;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+            position: relative;
+        }
+
+        .card-grid::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--light-blue), transparent);
+            opacity: 0.3;
+        }
+
+        /* Enhanced Dashboard Cards */
+        .dashboard-card {
+            background: var(--white);
+            padding: 0;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-speed) ease;
+            text-decoration: none;
+            color: var(--navy);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+            border-top: 4px solid var(--light-blue);
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-navy);
+        }
+
+        .dashboard-card:nth-child(odd):hover {
+            box-shadow: var(--shadow-gold);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--light-blue) 100%);
+            color: var(--white);
+            padding: 1.5rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .card-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 3px;
+            background: var(--gold);
+            border-radius: 2px;
+        }
+
+        .card-content {
+            padding: 2rem;
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card-icon-container {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--light-blue) 0%, var(--navy) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            color: var(--gold);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--navy);
+        }
+
+        .card-description {
+            color: var(--light-blue);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--navy);
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: var(--radius-sm);
+            transition: all var(--transition-speed) ease;
+            background: var(--blue-soft);
+            text-align: left;
+        }
+
+        .feature-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .feature-list li i {
+            color: var(--gold);
+            font-size: 1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .dashboard-card {
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .dashboard-card:hover .card-icon-container {
+            background: linear-gradient(135deg, var(--gold) 0%, #e59f00 100%);
+        }
+
+        .dashboard-card:hover .card-icon {
+            color: var(--white);
+        }
+
+        /* Card action styles - retained for compatibility */
+        .card-action {
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all var(--transition-speed) ease;
+            margin-top: auto;
+            display: inline-block;
+        }
+
+        .card-action:hover {
+            background: var(--navy);
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin: 3rem 0;
+            padding: 0 2rem;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            border-left: 4px solid var(--gold);
+            transition: all var(--transition-speed) ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--navy);
+            display: block;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        .stat-number.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stat-label {
+            color: var(--light-blue);
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            transition-delay: 0.2s;
+        }
+
+        .stat-label.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Additional stat label styles */
+        .stat-label {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 1024px) {
+            .stats-section {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .stats-section {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+                padding: 0 1rem;
+            }
+
+            .dashboard-title {
+                font-size: 2rem;
+                margin: 100px 0 40px;
+            }
+
+            .header {
+                padding: 1rem;
+            }
+
+            .dashboard-container {
+                padding: 0 1rem;
+            }
+
+            .dashboard-container::before,
+            .card-grid::before {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Enhanced Header -->
+    <header class="header">
+        <a href="#" class="logo">
+            <img src="assest/logo.png" alt="NyayaSetu Logo" class="logo-img">
+        </a>
+        <div class="nav-section">
+            <nav class="nav-links">
+                <a href="#" class="nav-link active">Dashboard</a>
+                <a href="cases.html" class="nav-link">Cases</a>
+                <a href="clients.html" class="nav-link">Clients</a>
+                <a href="documents.html" class="nav-link">Documents</a>
+            </nav>
+            <button class="upload-btn" onclick="window.location.href='fileupload.html'">
+                <i class="fas fa-upload"></i>
+                Upload File
+            </button>
+            <div class="user-info">
+                <div class="user-avatar">U</div>
+                <span class="username">Welcome, User</span>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Stats Section -->
+    <div class="stats-section">
+        <div class="stat-card">
+            <span class="stat-number" data-target="24">0</span>
+            <span class="stat-label">Active Cases</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number" data-target="156">0</span>
+            <span class="stat-label">Total Clients</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number" data-target="8">0</span>
+            <span class="stat-label">Upcoming Hearings</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number" data-target="342">0</span>
+            <span class="stat-label">Documents</span>
+        </div>
+    </div>
+
+    <!-- Dashboard Title -->
+    <h1 class="dashboard-title">Legal Management Hub</h1>
+
+    <!-- Dashboard Container with Subtle Dividers -->
+    <div class="dashboard-container">
+        <!-- Enhanced Card Grid -->
+        <div class="card-grid">
+            <!-- Cases Card -->
+            <div class="dashboard-card" onclick="window.location.href='cases.html'">
+                <div class="card-header">
+                    <div class="card-icon-container">
+                        <i class="fas fa-gavel card-icon"></i>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h2 class="card-title">Cases Management</h2>
+                    <p class="card-description">Comprehensive case tracking and management system for legal professionals.</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-calendar-check"></i> Court dates & deadline tracking</li>
+                        <li><i class="fas fa-clock"></i> Hearing schedules & reminders</li>
+                        <li><i class="fas fa-tasks"></i> Case status monitoring</li>
+                        <li><i class="fas fa-file-signature"></i> Document filing deadlines</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Clients Card -->
+            <div class="dashboard-card" onclick="window.location.href='#'">
+                <div class="card-header">
+                    <div class="card-icon-container">
+                        <i class="fas fa-users card-icon"></i>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h2 class="card-title">Client Relations</h2>
+                    <p class="card-description">Centralized client information management system.</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-address-card"></i> Complete client profiles</li>
+                        <li><i class="fas fa-history"></i> Case history & documentation</li>
+                        <li><i class="fas fa-comment-dots"></i> Communication records</li>
+                        <li><i class="fas fa-file-invoice"></i> Billing & payment tracking</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Documents Card -->
+            <div class="dashboard-card" onclick="window.location.href='#'">
+                <div class="card-header">
+                    <div class="card-icon-container">
+                        <i class="fas fa-file-alt card-icon"></i>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h2 class="card-title">Document Library</h2>
+                    <p class="card-description">Secure digital document management system.</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-folder-open"></i> Organized file storage</li>
+                        <li><i class="fas fa-search"></i> Quick search & retrieval</li>
+                        <li><i class="fas fa-history"></i> Version control</li>
+                        <li><i class="fas fa-lock"></i> Secure document sharing</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Personal Notes Card -->
+            <div class="dashboard-card" onclick="window.location.href='#'">
+                <div class="card-header">
+                    <div class="card-icon-container">
+                        <i class="fas fa-sticky-note card-icon"></i>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h2 class="card-title">Personal Notes</h2>
+                    <p class="card-description">Private note-taking and organization system.</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-tags"></i> Categorized notes & tags</li>
+                        <li><i class="fas fa-bell"></i> Important reminders</li>
+                        <li><i class="fas fa-search"></i> Quick note search</li>
+                        <li><i class="fas fa-link"></i> Case linking & references</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Counter Animation
+        function animateCounter(element) {
+            const target = parseInt(element.dataset.target);
+            const duration = 2000; // Animation duration in milliseconds
+            const start = 0;
+            const increment = target / (duration / 16); // Update every 16ms (60fps)
+            let current = start;
+            
+            const updateCounter = () => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target;
+                    element.classList.add('animate');
+                    element.parentElement.querySelector('.stat-label').classList.add('animate');
+                } else {
+                    element.textContent = Math.floor(current);
+                    requestAnimationFrame(updateCounter);
+                }
+            };
+            
+            updateCounter();
+        }
+
+        // Start counter animations when elements are in view
+        function handleIntersection(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statNumbers = entry.target.querySelectorAll('.stat-number');
+                    statNumbers.forEach((number, index) => {
+                        setTimeout(() => {
+                            animateCounter(number);
+                        }, index * 200); // Stagger the animations
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }
+
+        // Set up the Intersection Observer
+        const observer = new IntersectionObserver(handleIntersection, {
+            threshold: 0.5
+        });
+
+        // Observe the stats section
+        observer.observe(document.querySelector('.stats-section'));
+
+        // Logout function
+        function logout() {
+            // Show confirmation dialog
+            const confirmLogout = confirm('Are you sure you want to logout?');
+            
+            if (confirmLogout) {
+                // Clear authentication data from localStorage
+                localStorage.removeItem('nyayasetu_token');
+                localStorage.removeItem('nyayasetu_user');
+                
+                // Optional: Show logout message
+                alert('You have been logged out successfully.');
+                
+                // Redirect to login page
+                window.location.href = 'login.html';
+            }
+        }
+
+        // File Upload Functions
+        function triggerFileUpload() {
+            document.getElementById('fileUpload').click();
+        }
+
+        function handleFileUpload(input) {
+            const files = input.files;
+            
+            if (files.length === 0) {
+                return;
+            }
+
+            // Show upload progress/status
+            console.log(`Selected ${files.length} file(s) for upload:`);
+            
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                console.log(`File ${i + 1}: ${file.name} (${formatFileSize(file.size)})`);
+                
+                // Validate file type
+                if (!isValidFileType(file)) {
+                    alert(`File "${file.name}" is not a supported file type.`);
+                    continue;
+                }
+                
+                // Validate file size (max 10MB)
+                if (file.size > 10 * 1024 * 1024) {
+                    alert(`File "${file.name}" is too large. Maximum size is 10MB.`);
+                    continue;
+                }
+                
+                // Process the file (you can extend this based on your needs)
+                processFile(file);
+            }
+            
+            // Clear the input for next upload
+            input.value = '';
+        }
+
+        function isValidFileType(file) {
+            const allowedTypes = [
+                'application/pdf',
+                'application/msword',
+                'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                'text/plain',
+                'image/jpeg',
+                'image/jpg',
+                'image/png'
+            ];
+            
+            return allowedTypes.includes(file.type);
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        function processFile(file) {
+            // Show upload notification
+            showNotification(`Uploading "${file.name}"...`, 'info');
+            
+            // Create FormData for file upload
+            const formData = new FormData();
+            formData.append('file', file);
+            
+            // Get auth token for API requests
+            const token = localStorage.getItem('nyayasetu_token');
+            
+            // Simulate file upload (replace with actual API endpoint when available)
+            // Since the backend server is down, we'll simulate the upload
+            setTimeout(() => {
+                showNotification(`"${file.name}" uploaded successfully!`, 'success');
+                
+                // You can add the file to a list or perform other actions here
+                addFileToDocumentsList(file);
+            }, 1000 + Math.random() * 2000); // Simulate upload time
+            
+            /* 
+            // Uncomment this when backend is available:
+            fetch('YOUR_UPLOAD_ENDPOINT_HERE', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                showNotification(`"${file.name}" uploaded successfully!`, 'success');
+                addFileToDocumentsList(file);
+            })
+            .catch(error => {
+                console.error('Upload error:', error);
+                showNotification(`Failed to upload "${file.name}". Please try again.`, 'error');
+            });
+            */
+        }
+
+        function showNotification(message, type = 'info') {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 1rem 1.5rem;
+                border-radius: 8px;
+                color: white;
+                font-weight: 500;
+                z-index: 1000;
+                max-width: 350px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                animation: slideInRight 0.3s ease-out;
+            `;
+            
+            // Set background color based on type
+            const colors = {
+                'info': 'var(--light-blue)',
+                'success': '#10B981',
+                'error': '#EF4444'
+            };
+            notification.style.backgroundColor = colors[type] || colors.info;
+            
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            // Remove notification after 3 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease-out';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        function addFileToDocumentsList(file) {
+            // This function can be used to add the uploaded file to a documents list
+            // For now, we'll just log it
+            console.log(`Added "${file.name}" to documents list`);
+            
+            // You can extend this to update a documents section on the dashboard
+            // or maintain a list of uploaded files
+        }
+
+        // Add CSS animations for notifications
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            
+            @keyframes slideOutRight {
+                from {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Authentication check
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            const token = localStorage.getItem('nyayasetu_token');
+            const user = JSON.parse(localStorage.getItem('nyayasetu_user') || '{}');
+            
+            console.log('Authentication check - Token exists:', !!token);
+            console.log('User data available:', Object.keys(user).length > 0);
+            
+            if (!token) {
+                // Not logged in, redirect to login page
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // Let's fetch user data directly from localStorage to ensure we have the most current data
+            const rawUserData = localStorage.getItem('nyayasetu_user');
+            console.log('Raw user data from localStorage:', rawUserData);
+            
+            // Elements we need to update
+            const usernameElement = document.querySelector('.username');
+            const avatarElement = document.querySelector('.user-avatar');
+            
+            // Function to update the display with user info
+            function updateDisplayWithUserInfo(userData) {
+                if (!userData) return false;
+                
+                // Directly examine all properties at all levels of the object
+                function findUserName(obj, depth = 0) {
+                    if (depth > 3) return null; // Prevent infinite recursion
+                    
+                    // Direct properties check
+                    if (obj.name) return obj.name;
+                    if (obj.fullName) return obj.fullName;
+                    if (obj.username) return obj.username;
+                    if (obj.email) return obj.email?.split('@')[0];
+                    
+                    // Check nested objects
+                    for (const key in obj) {
+                        if (obj[key] && typeof obj[key] === 'object') {
+                            const result = findUserName(obj[key], depth + 1);
+                            if (result) return result;
+                        }
+                    }
+                    
+                    return null;
+                }
+                
+                // Try to find a name
+                const displayName = findUserName(userData);
+                console.log('Found display name:', displayName);
+                
+                // Update UI if we found a name
+                if (displayName) {
+                    if (usernameElement) {
+                        usernameElement.textContent = `Welcome, ${displayName}`;
+                        return true;
+                    }
+                    
+                    if (avatarElement) {
+                        avatarElement.textContent = displayName.charAt(0).toUpperCase();
+                    }
+                }
+                
+                return false;
+            }
+            
+            // First try with the parsed user data from localStorage
+            let userInfoUpdated = false;
+            try {
+                if (rawUserData) {
+                    const parsedUserData = JSON.parse(rawUserData);
+                    console.log('Parsed user data:', parsedUserData);
+                    userInfoUpdated = updateDisplayWithUserInfo(parsedUserData);
+                }
+            } catch (e) {
+                console.error('Error parsing user data:', e);
+            }
+            
+            // If the above didn't work, try to get user data from the API
+            if (!userInfoUpdated && token) {
+                console.log('Fetching user data from API...');
+                
+                // Try to get fresh user data from API
+                fetch('https://backendtemp-h9yg.onrender.com/nyayasetu/api/admins/me', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) throw new Error('Failed to fetch user data');
+                    return response.json();
+                })
+                .then(responseData => {
+                    console.log('API response:', responseData);
+                    
+                    // Save this data for future use
+                    localStorage.setItem('nyayasetu_user', JSON.stringify(responseData));
+                    
+                    // Try to update the display with this fresh data
+                    updateDisplayWithUserInfo(responseData);
+                })
+                .catch(err => {
+                    console.error('API fetch error:', err);
+                });
+            }
+            
+            // Debug helper function
+            window.showUserData = function() {
+                const userData = localStorage.getItem('nyayasetu_user');
+                const token = localStorage.getItem('nyayasetu_token');
+                alert('User data in localStorage:\n\n' + userData + '\n\nToken exists: ' + !!token);
+                console.log('User data:', JSON.parse(userData || '{}'));
+                console.log('Token:', token);
+                return false;
+            };
+            
+            // If we still couldn't find a name, let's check if we need to provide a generic welcome
+            if (usernameElement && usernameElement.textContent === 'Welcome, User') {
+                usernameElement.textContent = 'Welcome, Advocate';
+            }
+            
+            // Fetch user data or validate token if needed
+            // This is a good place to make an API call to verify the token is still valid
+            /*
+            fetch('https://backendtemp-h9yg.onrender.com/nyayasetu/api/admins/me', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Invalid session');
+                }
+                return response.json();
+            })
+            .catch(error => {
+                console.error('Authentication error:', error);
+                localStorage.removeItem('nyayasetu_token');
+                localStorage.removeItem('nyayasetu_user');
+                window.location.href = 'login.html';
+            });
+            */
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NyayaSetu - Your Bridge to Justice</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --navy: #0A2647;
+            --gold: #FFB100;
+            --light-blue: #205295;
+            --white: #FFFFFF;
+            --transition-speed: 0.3s;
+            --bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--navy);
+            background-color: #f8f9fa;
+        }
+
+        /* Animation Keyframes */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section {
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(10, 38, 71, 0.1);
+        }
+
+        .section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 3px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                var(--gold) 50%, 
+                transparent 100%
+            );
+        }
+
+        .section:last-of-type {
+            border-bottom: none;
+        }
+
+        .section:last-of-type::after {
+            display: none;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+            font-size: 2.5rem;
+            color: var(--navy);
+            font-weight: 700;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--gold);
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            bottom: -2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(10, 38, 71, 0.1) 50%, 
+                transparent 100%
+            );
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--navy);
+            letter-spacing: -0.1px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            line-height: 1.3;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--light-blue);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--white);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .logo {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 80px;  /* Reduced to 80px as requested */
+            width: auto;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+            padding: 8px 0;  /* Slightly reduced padding to match new height */
+        }
+
+        .logo img:hover {
+            transform: scale(1.02);  /* Reduced scale effect to be more subtle */
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--navy);
+            font-weight: 500;
+            transition: color var(--transition-speed) ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--gold);
+            transition: width var(--transition-speed) ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.75rem;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .btn-outline {
+            border: 2px solid var(--navy);
+            color: var(--navy);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--navy);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-solid {
+            background: var(--navy);
+            color: var(--white);
+            border: none;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-solid:hover {
+            box-shadow: 0 5px 20px rgba(10, 38, 71, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-cta {
+            background: var(--gold);
+            color: var(--navy);
+            font-weight: 700;
+            padding: 1.2rem 2.5rem;
+            font-size: 1.1rem;
+            border-radius: var(--radius-md);
+            text-transform: none;
+            letter-spacing: 0;
+        }
+
+        .btn-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 177, 0, 0.4);
+        }
+
+        .btn-cta::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 80%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .btn-cta:hover::after {
+            opacity: 1;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: url('assest/bg1.jpg') center/cover no-repeat fixed;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            position: relative;
+            overflow: hidden;
+            perspective: 1000px;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(10, 38, 71, 0.55), rgba(32, 82, 149, 0.45));
+            z-index: 1;
+            transform: translateZ(0);
+            will-change: transform;
+            transition: transform 0.5s ease-out;
+        }
+
+        .hero:hover::after {
+            transform: translateZ(50px);
+        }
+
+        .hero-subtitle {
+            color: var(--gold);
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin: 1.5rem 0;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 0.8s ease-out 0.3s forwards;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s var(--bounce) forwards;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            opacity: 0;
+            animation: fadeInUp 0.8s var(--bounce) 0.2s forwards;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s var(--bounce) 0.4s forwards;
+        }
+
+        /* About Section */
+        .section {
+            padding: 5rem 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--navy);
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        /* Features Section */
+        .features {
+            background: #f8f9fa;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);  /* Fixed 4 columns */
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            overflow-x: auto;  /* Enable horizontal scroll if needed */
+        }
+
+        @media (max-width: 1200px) {
+            .feature-grid {
+                grid-template-columns: repeat(4, 300px);  /* Fixed width cards */
+                justify-content: flex-start;
+                padding: 2rem 1rem;
+            }
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 2rem 1.5rem;
+            border-radius: var(--radius-md);
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            opacity: 0;
+            transform: translateY(20px);
+            position: relative;
+            overflow: hidden;
+            min-width: 250px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-card i {
+            font-size: 2.8rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            transition: all 0.4s var(--bounce);
+            background: linear-gradient(45deg, var(--gold), #FFD700);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: var(--gold);
+        }
+
+        .feature-card:hover i {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        .feature-card h3 {
+            margin-bottom: 1.2rem;
+            color: var(--navy);
+            font-size: 1.4rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover h3 {
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .feature-card p {
+            color: var(--light-blue);
+            line-height: 1.7;
+            font-size: 1.05rem;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover p {
+            transform: translateY(-2px);
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .info-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .info-item i {
+            color: var(--gold);
+            font-size: 1.5rem;
+        }
+
+        .business-hours {
+            margin-top: 2rem;
+        }
+
+        .hours-grid {
+            display: grid;
+            grid-template-columns: auto auto;
+            gap: 1rem;
+        }
+
+        .contact-form form {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .form-input {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 2px rgba(255, 177, 0, 0.2);
+        }
+
+        textarea.form-input {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .contact-grid {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all var(--transition-speed) ease;
+        }
+
+        .contact-grid.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--navy);
+            color: var(--white);
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-icons a {
+            color: var(--white);
+            font-size: 1.5rem;
+            transition: all var(--transition-speed) ease;
+            display: inline-block;
+        }
+
+        .social-icons a:hover {
+            color: var(--gold);
+            transform: scale(1.2);
+        }
+
+        footer {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all var(--transition-speed) ease;
+        }
+
+        footer.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="#" class="logo">
+            <img src="assest/logo.png" alt="NyayaSetu Logo">
+        </a>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#features">Features</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div class="auth-buttons">
+            <a href="login.html" class="btn btn-outline">Login</a>
+            <a href="signup.html" class="btn btn-solid">Signup</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Your Bridge to Justice</h1>
+            <p class="hero-subtitle">Connecting people with legal solutions easily and affordably.</p>
+            <a href="login.html" class="btn btn-cta">Get Started</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <h2 class="section-title">About NyayaSetu</h2>
+        <div class="about-content">
+            <p>NyayaSetu is a digital bridge that connects people with justice. We understand that legal matters can feel confusing and overwhelming, so our platform is designed to make the process simple, clear, and accessible. With NyayaSetu, you can easily stay informed about your cases, connect with trusted lawyers, and receive important updates without any hassle. Our goal is to ensure that justice is not just a right, but something that everyone can reach with ease and confidence.</p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section features">
+        <h2 class="section-title">Our Features</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <i class="fas fa-user-tie"></i>
+                <h3>Find a Lawyer</h3>
+                <p>Browse trusted legal professionals easily.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-tasks"></i>
+                <h3>Case Tracking</h3>
+                <p>Keep updated on your legal cases anytime.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-book-open"></i>
+                <h3>Legal Resources</h3>
+                <p>Access free guides and legal documents.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-comments"></i>
+                <h3>Free Consultation</h3>
+                <p>Get quick legal advice online.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <h2 class="section-title">Contact Us</h2>
+        <div class="contact-container">
+            <div class="contact-message">
+                <p class="support-message">We are here to support you at every step of your legal journey. Our dedicated team is committed to ensuring you get the guidance and assistance you need. Whether you have questions about our services, need technical support, or want to explore how we can help you - don't hesitate to reach out. Your access to justice is our priority.</p>
+            </div>
+            <div class="contact-info">
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <h3>Email</h3>
+                        <p>support@nyayasetu.com</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <h3>Phone</h3>
+                        <p>+91 98765 43210</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <h3>Location</h3>
+                        <p>Lucknow, Uttar Pradesh, India</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <style>
+            .contact-container {
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 2rem;
+            }
+            
+            .contact-message {
+                text-align: center;
+                margin-bottom: 3rem;
+            }
+            
+            .support-message {
+                font-size: 1.1rem;
+                line-height: 1.8;
+                color: var(--navy);
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 1rem;
+            }
+            
+            .contact-info {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 2rem;
+                margin-top: 2rem;
+            }
+            
+            .info-item {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                padding: 1.5rem;
+                background: rgba(255, 255, 255, 0.9);
+                border-radius: 10px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease;
+            }
+            
+            .info-item:hover {
+                transform: translateY(-5px);
+            }
+            
+            .info-item i {
+                font-size: 1.8rem;
+                color: var(--gold);
+            }
+            
+            .info-item h3 {
+                color: var(--navy);
+                margin-bottom: 0.5rem;
+                font-size: 1.2rem;
+            }
+            
+            .info-item p {
+                color: var(--light-blue);
+                font-size: 1rem;
+            }
+        </style>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#features">Features</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+        <p>&copy; 2025 NyayaSetu. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        // Observe all elements that need animation
+        document.querySelectorAll('.feature-card, .contact-grid, footer, .about-content').forEach((el) => {
+            observer.observe(el);
+        });
+
+        // Add stagger effect to feature cards
+        document.querySelectorAll('.feature-card').forEach((card, index) => {
+            card.style.transitionDelay = `${index * 0.1}s`;
+        });
+    </script>
+</body>
+</html>
