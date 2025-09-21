@@ -1,0 +1,10 @@
+Flask
+python-dotenv
+mysql-connector-python
+PyMuPDF
+google-generativeai
+sentence-transformers
+torch
+numpy
+faiss-cpu
+PyJWT
