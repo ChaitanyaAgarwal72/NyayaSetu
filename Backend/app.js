@@ -8,10 +8,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //Routs
 const adminRoutes = require("./routes/admin.routes");
 const lawyerRoutes = require("./routes/lawyer.routes");
+const clientRoutes = require("./routes/clients.routes");
 //admin Routes
 app.use("/nyayasetu/api/admins", adminRoutes);
 //Lawyer Routes
 app.use("/nyayasetu/api/lawyers", lawyerRoutes);
+//client Routes
+app.use("/nyayasetu/api/clients", clientRoutes);
 // app.use(cors({
 //   origin: 'http://localhost:3000',  // frontend URL
 //   methods: ['GET', 'POST', 'PUT', 'DELETE'],
