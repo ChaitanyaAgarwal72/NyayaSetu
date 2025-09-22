@@ -10,6 +10,7 @@ const adminRoutes = require("./routes/admin.routes");
 const lawyerRoutes = require("./routes/lawyer.routes");
 const clientRoutes = require("./routes/clients.routes");
 const casesRoutes = require("./routes/cases.routes");
+const hearingsRoutes = require("./routes/hearings.routes");
 //admin Routes
 app.use("/nyayasetu/api/admins", adminRoutes);
 //Lawyer Routes
@@ -18,6 +19,8 @@ app.use("/nyayasetu/api/lawyers", lawyerRoutes);
 app.use("/nyayasetu/api/clients", clientRoutes);
 //cases Routes
 app.use("/nyayasetu/api/cases", casesRoutes);
+//hearings Routes
+app.use("/nyayasetu/api/hearings", hearingsRoutes);
 // app.use(cors({
 //   origin: 'http://localhost:3000',  // frontend URL
 //   methods: ['GET', 'POST', 'PUT', 'DELETE'],
