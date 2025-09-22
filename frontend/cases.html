@@ -1,0 +1,2518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cases - NyayaSetu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="config.js"></script>
+    <style>
+        :root {
+            --navy: #0A2647;
+            --light-blue: #205295;
+            --blue-soft: #E3F2FD;
+            --gold: #FFB100;
+            --gold-soft: #FFF8E1;
+            --white: #FFFFFF;
+            --gray-light: #F5F5F5;
+            --gray-medium: #E0E0E0;
+            --gray-dark: #757575;
+            --success: #4CAF50;
+            --error: #F44336;
+            --warning: #FF9800;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --transition-speed: 0.3s;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.15);
+            --shadow-lg: 0 8px 32px rgba(0,0,0,0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--blue-soft) 0%, var(--white) 100%);
+            min-height: 100vh;
+            color: var(--navy);
+        }
+
+        .header {
+            background: var(--white);
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(10, 38, 71, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
+        }
+
+        .logo-img {
+            height: 40px;
+            width: auto;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .nav-section {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-link {
+            color: var(--navy);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-sm);
+            transition: all var(--transition-speed) ease;
+            position: relative;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: var(--light-blue);
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -0.75rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 2px;
+        }
+
+        .upload-btn {
+            background: linear-gradient(135deg, var(--light-blue) 0%, var(--navy) 100%);
+            color: var(--white);
+            border: none;
+            padding: 0.7rem 1.2rem;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .upload-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            background: linear-gradient(135deg, var(--navy) 0%, var(--light-blue) 100%);
+        }
+
+        .upload-btn i {
+            font-size: 0.9rem;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--navy);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        .username {
+            font-weight: 600;
+            color: var(--navy);
+            margin-right: 1rem;
+        }
+
+        .logout-btn {
+            background: var(--gold);
+            color: var(--navy);
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+        }
+
+        .logout-btn:hover {
+            background: #E09600;
+            transform: translateY(-1px);
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .cases-section {
+            flex: 0 0 45%;
+            min-width: 0;
+        }
+
+        .chatbot-section {
+            flex: 0 0 55%;
+            position: sticky;
+            top: 120px;
+            height: calc(100vh - 140px);
+            overflow: hidden;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: linear-gradient(135deg, var(--navy) 0%, var(--light-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-subtitle {
+            color: var(--gray-dark);
+            font-size: 1.1rem;
+            font-weight: 400;
+        }
+
+        .cases-container {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+        }
+
+        .loading-state {
+            padding: 3rem;
+            text-align: center;
+            color: var(--gray-dark);
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--gray-medium);
+            border-radius: 50%;
+            border-top-color: var(--light-blue);
+            animation: spin 1s ease-in-out infinite;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .empty-state {
+            padding: 3rem;
+            text-align: center;
+            color: var(--gray-dark);
+        }
+
+        .empty-icon {
+            font-size: 3rem;
+            color: var(--gray-medium);
+            margin-bottom: 1rem;
+        }
+
+        .case-item {
+            border-bottom: 1px solid var(--gray-medium);
+        }
+
+        .case-item:last-child {
+            border-bottom: none;
+        }
+
+        .case-header {
+            padding: 1.5rem 2rem;
+            background: var(--gray-light);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all var(--transition-speed);
+            user-select: none;
+        }
+
+        .case-header:hover {
+            background: var(--blue-soft);
+        }
+
+        .case-header.active {
+            background: var(--light-blue);
+            color: var(--white);
+        }
+
+        .case-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .case-number {
+            background: var(--gold);
+            color: var(--navy);
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .case-header.active .case-number {
+            background: var(--white);
+            color: var(--navy);
+        }
+
+        .case-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .status-processed { background: var(--success); }
+        .status-processing { background: var(--warning); }
+        .status-pending { background: var(--error); }
+        .status-on-hold { background: var(--navy); }
+        .status-appeal { background: var(--light-blue); }
+
+        .dropdown-icon {
+            font-size: 1rem;
+            transition: transform var(--transition-speed);
+        }
+
+        .case-header.active .dropdown-icon {
+            transform: rotate(180deg);
+        }
+
+        .case-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height var(--transition-speed) ease;
+        }
+
+        .case-content.expanded {
+            max-height: 2000px;
+        }
+
+        .case-details {
+            padding: 2rem;
+            background: var(--white);
+        }
+
+        .case-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-card {
+            background: var(--gray-light);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+        }
+
+        .info-card-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-card-content {
+            color: var(--gray-dark);
+            line-height: 1.6;
+        }
+
+        .rag-analysis {
+            background: var(--blue-soft);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .rag-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .rag-content {
+            color: var(--navy);
+            line-height: 1.6;
+        }
+
+        .key-points {
+            list-style: none;
+            padding: 0;
+        }
+
+        .key-points li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .key-points li:before {
+            content: "▸";
+            color: var(--gold);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .key-points li:last-child {
+            border-bottom: none;
+        }
+
+        .refresh-btn {
+            background: var(--light-blue);
+            color: var(--white);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .refresh-btn:hover {
+            background: var(--navy);
+            transform: translateY(-1px);
+        }
+
+        .add-case-btn {
+            background: var(--gold);
+            color: var(--navy);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .add-case-btn:hover {
+            background: #E5A000;
+            transform: translateY(-1px);
+        }
+
+        .button-container {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: var(--white);
+            margin: 2rem auto;
+            padding: 0;
+            border-radius: var(--radius-md);
+            max-width: 600px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            background: var(--light-blue);
+            color: var(--white);
+            padding: 1.5rem 2rem;
+            border-radius: var(--radius-md) var(--radius-md) 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: background var(--transition-speed);
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            flex: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--navy);
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--gray-medium);
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            transition: border-color var(--transition-speed);
+            background: var(--white);
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--light-blue);
+            box-shadow: 0 0 0 3px rgba(32, 82, 149, 0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .modal-footer {
+            padding: 1.5rem 2rem;
+            border-top: 1px solid var(--gray-medium);
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+
+        .btn-secondary {
+            background: var(--gray-medium);
+            color: var(--navy);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gray-dark);
+            color: var(--white);
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: var(--navy);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            background: #E5A000;
+            transform: translateY(-1px);
+        }
+
+        .btn-primary:disabled {
+            background: var(--gray-medium);
+            color: var(--gray-dark);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .update-case-btn {
+            background: var(--light-blue);
+            color: var(--white);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .update-case-btn:hover {
+            background: var(--navy);
+            transform: translateY(-1px);
+        }
+
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-lg);
+            z-index: 1000;
+            transform: translateX(400px);
+            transition: transform var(--transition-speed);
+            max-width: 400px;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            background: var(--success);
+            color: var(--white);
+        }
+
+        .notification.error {
+            background: var(--error);
+            color: var(--white);
+        }
+
+        .notification.info {
+            background: var(--light-blue);
+            color: var(--white);
+        }
+
+        .chatbot-container {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chatbot-header {
+            background: var(--navy);
+            color: var(--white);
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        }
+
+        .chatbot-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .chatbot-close {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.25rem;
+            border-radius: var(--radius-sm);
+            transition: all var(--transition-speed);
+        }
+
+        .chatbot-close:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            background: var(--gray-light);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .message {
+            max-width: 85%;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius-md);
+            line-height: 1.4;
+            font-size: 0.9rem;
+        }
+
+        .message.bot {
+            background: var(--navy);
+            color: var(--white);
+            align-self: flex-start;
+            border-bottom-left-radius: 0.25rem;
+        }
+
+        .message.user {
+            background: var(--gold);
+            color: var(--navy);
+            align-self: flex-end;
+            border-bottom-right-radius: 0.25rem;
+        }
+
+        .quick-actions {
+            padding: 0.75rem 1rem;
+            background: var(--white);
+            border-top: 1px solid var(--gray-medium);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .quick-action-btn {
+            background: var(--gold-soft);
+            color: var(--navy);
+            border: 1px solid var(--gold);
+            padding: 0.4rem 0.8rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            flex: 1;
+            min-width: calc(50% - 0.25rem);
+            text-align: center;
+        }
+
+        .quick-action-btn:hover {
+            background: var(--gold);
+            color: var(--white);
+        }
+
+        .chat-input-container {
+            padding: 1rem;
+            background: var(--white);
+            border-top: 1px solid var(--gray-medium);
+            border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+        }
+
+        .chat-input-wrapper {
+            display: flex;
+            gap: 0.5rem;
+            align-items: flex-end;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid var(--gray-medium);
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            font-size: 0.9rem;
+            resize: none;
+            min-height: 40px;
+            max-height: 100px;
+            overflow-y: auto;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: var(--light-blue);
+            box-shadow: 0 0 0 2px rgba(32, 82, 149, 0.1);
+        }
+
+        .chat-send-btn {
+            background: var(--navy);
+            color: var(--white);
+            border: none;
+            padding: 0.75rem;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 40px;
+            height: 40px;
+        }
+
+        .chat-send-btn:hover {
+            background: var(--light-blue);
+        }
+
+        .chat-send-btn:disabled {
+            background: var(--gray-medium);
+            cursor: not-allowed;
+        }
+
+        .typing-indicator {
+            display: none;
+            padding: 0.75rem 1rem;
+            background: var(--navy);
+            color: var(--white);
+            border-radius: var(--radius-md);
+            border-bottom-left-radius: 0.25rem;
+            align-self: flex-start;
+            max-width: 85%;
+        }
+
+        .typing-dots {
+            display: inline-flex;
+            gap: 0.25rem;
+        }
+
+        .typing-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--white);
+            border-radius: 50%;
+            animation: typing 1.4s infinite ease-in-out;
+        }
+
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes typing {
+            0%, 80%, 100% { opacity: 0.3; }
+            40% { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .cases-section {
+                flex: none;
+            }
+
+            .chatbot-section {
+                flex: none;
+                position: relative;
+                top: auto;
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="dashboard.html" class="logo">
+            <img src="assest/logo.png" alt="NyayaSetu Logo" class="logo-img">
+        </a>
+        <div class="nav-section">
+            <nav class="nav-links">
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                <a href="cases.html" class="nav-link active">Cases</a>
+                <a href="clients.html" class="nav-link">Clients</a>
+                <a href="documents.html" class="nav-link">Documents</a>
+            </nav>
+            <button class="upload-btn" onclick="window.location.href='fileupload.html'">
+                <i class="fas fa-upload"></i>
+                Upload File
+            </button>
+            <div class="user-info">
+                <div class="user-avatar">U</div>
+                <span class="username" id="userWelcome">Welcome, User</span>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Cases Section (70%) -->
+        <div class="cases-section">
+            <div class="page-header">
+                <h1 class="page-title">Cases</h1>
+                <p class="page-subtitle">Manage and review your legal cases with AI-powered analysis</p>
+            </div>
+
+            <div class="button-container">
+                <button class="refresh-btn" onclick="loadCases()">
+                    <i class="fas fa-sync-alt"></i>
+                    Refresh Cases
+                </button>
+                <button class="add-case-btn" onclick="openAddCaseModal()">
+                    <i class="fas fa-plus"></i>
+                    Add Case
+                </button>
+            </div>
+
+            <div class="cases-container" id="casesContainer">
+                <div class="loading-state">
+                    <div class="loading-spinner"></div>
+                    <p>Loading cases...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chatbot Section (30%) -->
+        <div class="chatbot-section">
+            <div class="chatbot-container">
+                <div class="chatbot-header">
+                    <div class="chatbot-title">
+                        <i class="fas fa-robot"></i>
+                        Sevak
+                    </div>
+                </div>
+
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message bot">
+                        Hello I'm your Sevak. How can I help today?
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+                    <button class="quick-action-btn" onclick="sendQuickMessage('I need help finding a case status.')">
+                        I need help finding a case status.
+                    </button>
+                </div>
+
+                <div class="chat-input-container">
+                    <div class="chat-input-wrapper">
+                        <textarea 
+                            class="chat-input" 
+                            id="chatInput" 
+                            placeholder="Type you message..."
+                            rows="1"
+                            onkeypress="handleChatInputKeypress(event)"
+                        ></textarea>
+                        <button class="chat-send-btn" onclick="sendChatMessage()">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Typing Indicator -->
+                <div class="typing-indicator" id="typingIndicator">
+                    <span>Assistant is typing</span>
+                    <div class="typing-dots">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Case Modal -->
+    <div id="addCaseModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Add New Case</h2>
+                <button class="close-btn" onclick="closeAddCaseModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="addCaseForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="clientSelect">Select Client *</label>
+                            <select id="clientSelect" name="client_id" class="form-select" required>
+                                <option value="">Loading clients...</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="caseNumber">Case Number *</label>
+                            <input type="text" id="caseNumber" name="case_number" class="form-input" required placeholder="e.g., 202240123445">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="caseTitle">Case Title *</label>
+                        <input type="text" id="caseTitle" name="case_title" class="form-input" required placeholder="e.g., Property Dispute - Kumar vs Mishra">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="courtName">Court Name *</label>
+                            <input type="text" id="courtName" name="court_name" class="form-input" required placeholder="e.g., District Court Surat">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="caseType">Case Type *</label>
+                            <select id="caseType" name="case_type" class="form-select" required>
+                                <option value="">Select Case Type</option>
+                                <option value="Civil">Civil</option>
+                                <option value="Criminal">Criminal</option>
+                                <option value="Family">Family</option>
+                                <option value="Corporate">Corporate</option>
+                                <option value="Property">Property</option>
+                                <option value="Labor">Labor</option>
+                                <option value="Tax">Tax</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="filingDate">Filing Date *</label>
+                            <input type="date" id="filingDate" name="filing_date" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="status">Status *</label>
+                            <select id="status" name="status" class="form-select" required>
+                                <option value="">Select Status</option>
+                                <option value="Pending">Pending</option>
+                                <option value="Ongoing">Ongoing</option>
+                                <option value="Reserved for Judgment">Reserved for Judgment</option>
+                                <option value="Disposed">Disposed</option>
+                                <option value="Appeal Filed">Appeal Filed</option>
+                                <option value="Closed">Closed</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="description">Description *</label>
+                        <textarea id="description" name="description" class="form-textarea" required placeholder="Property ownership dispute regarding Plot No. 123 in Sector 5..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" onclick="closeAddCaseModal()">Cancel</button>
+                <button type="button" class="btn-primary" onclick="addCase()" id="addCaseSubmitBtn">
+                    <i class="fas fa-paper-plane"></i>
+                    Submit
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Update Case Modal -->
+    <div id="updateCaseModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Update Case</h2>
+                <button class="close-btn" onclick="closeUpdateCaseModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="updateCaseForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="updateClientSelect">Select Client *</label>
+                            <select id="updateClientSelect" name="client_id" class="form-select" required>
+                                <option value="">Loading clients...</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="updateCaseNumber">Case Number *</label>
+                            <input type="text" id="updateCaseNumber" name="case_number" class="form-input" required placeholder="e.g., 202240123445">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="updateCaseTitle">Case Title *</label>
+                        <input type="text" id="updateCaseTitle" name="case_title" class="form-input" required placeholder="e.g., Property Dispute - Kumar vs Mishra">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="updateCourtName">Court Name *</label>
+                            <input type="text" id="updateCourtName" name="court_name" class="form-input" required placeholder="e.g., District Court Surat">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="updateCaseType">Case Type *</label>
+                            <select id="updateCaseType" name="case_type" class="form-select" required>
+                                <option value="">Select Case Type</option>
+                                <option value="Civil">Civil</option>
+                                <option value="Criminal">Criminal</option>
+                                <option value="Family">Family</option>
+                                <option value="Corporate">Corporate</option>
+                                <option value="Property">Property</option>
+                                <option value="Labor">Labor</option>
+                                <option value="Tax">Tax</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="updateFilingDate">Filing Date *</label>
+                            <input type="date" id="updateFilingDate" name="filing_date" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="updateStatus">Status *</label>
+                            <select id="updateStatus" name="status" class="form-select" required>
+                                <option value="">Select Status</option>
+                                <option value="Pending">Pending</option>
+                                <option value="Ongoing">Ongoing</option>
+                                <option value="Reserved for Judgment">Reserved for Judgment</option>
+                                <option value="Disposed">Disposed</option>
+                                <option value="Appeal Filed">Appeal Filed</option>
+                                <option value="Closed">Closed</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="updateDescription">Description *</label>
+                        <textarea id="updateDescription" name="description" class="form-textarea" required placeholder="Property ownership dispute regarding Plot No. 123 in Sector 5..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" onclick="closeUpdateCaseModal()">Cancel</button>
+                <button type="button" class="btn-primary" onclick="updateCase()" id="updateCaseSubmitBtn">
+                    <i class="fas fa-save"></i>
+                    Update
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
+
+    <script>
+        // Global variables
+        let casesData = [];
+        let caseNumbers = []; // Store all case numbers for chatbot access
+        let currentActiveCaseNumber = null; // Track currently selected case for chatbot
+        let selectedCaseForChat = null; // Track case selected for chat queries
+
+        // Chat persistence key
+        const CHAT_STORAGE_KEY = CONFIG.STORAGE_KEYS.CHAT_MESSAGES;
+        const SELECTED_CASE_KEY = CONFIG.STORAGE_KEYS.SELECTED_CASE;
+        
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuthentication();
+            loadUserInfo(); // Load user name
+            loadCases();
+            loadChatHistory(); // Load saved chat messages
+        });
+
+        // Check if user is authenticated
+        function checkAuthentication() {
+            const token = localStorage.getItem(CONFIG.STORAGE_KEYS.AUTH_TOKEN);
+            if (!token) {
+                window.location.href = 'login.html';
+                return;
+            }
+        }
+
+        // Load user information
+        function loadUserInfo() {
+            try {
+                // Try to get user data from localStorage
+                const userData = localStorage.getItem('nyayasetu_user');
+                const usernameElement = document.querySelector('.username');
+                
+                if (userData && usernameElement) {
+                    const user = JSON.parse(userData);
+                    
+                    // Function to find user name in nested object
+                    function findUserName(obj, depth = 0) {
+                        if (depth > 3) return null; // Prevent infinite recursion
+                        
+                        // Direct properties check
+                        if (obj.name) return obj.name;
+                        if (obj.fullName) return obj.fullName;
+                        if (obj.username) return obj.username;
+                        if (obj.email) return obj.email?.split('@')[0];
+                        
+                        // Check nested objects
+                        for (const key in obj) {
+                            if (obj[key] && typeof obj[key] === 'object') {
+                                const result = findUserName(obj[key], depth + 1);
+                                if (result) return result;
+                            }
+                        }
+                        
+                        return null;
+                    }
+                    
+                    const displayName = findUserName(user) || 'User';
+                    usernameElement.textContent = `Welcome, ${displayName}`;
+                } else if (usernameElement) {
+                    // Fallback to default if no user data found
+                    usernameElement.textContent = 'Welcome, User';
+                }
+            } catch (error) {
+                console.log('Error loading user info:', error);
+                // Keep default text if there's an error
+            }
+        }
+
+        // Logout function
+        function logout() {
+            // Clear chat history on logout
+            localStorage.removeItem(CHAT_STORAGE_KEY);
+            localStorage.removeItem(SELECTED_CASE_KEY);
+            localStorage.removeItem(CONFIG.STORAGE_KEYS.AUTH_TOKEN);
+            showNotification('Logged out successfully!', 'success');
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 1000);
+        }
+
+        // Load cases from backend
+        async function loadCases() {
+            const container = document.getElementById('casesContainer');
+            
+            // Show loading state
+            container.innerHTML = `
+                <div class="loading-state">
+                    <div class="loading-spinner"></div>
+                    <p>Loading cases...</p>
+                </div>
+            `;
+            
+            try {
+                const token = localStorage.getItem(CONFIG.STORAGE_KEYS.AUTH_TOKEN);
+                const response = await fetch(CONFIG.API_BASE_URL + CONFIG.API_ENDPOINTS.CASES, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                
+                // Log the raw response to understand its structure
+                console.log('Raw API response:', data);
+                console.log('Response type:', typeof data);
+                console.log('Is array?', Array.isArray(data));
+                
+                // Handle different response structures
+                let casesArray = [];
+                if (Array.isArray(data)) {
+                    casesArray = data;
+                } else if (data && Array.isArray(data.cases)) {
+                    casesArray = data.cases;
+                } else if (data && Array.isArray(data.data)) {
+                    casesArray = data.data;
+                } else if (data && typeof data === 'object') {
+                    // If it's an object, convert to array or handle as single case
+                    casesArray = [data];
+                } else {
+                    casesArray = [];
+                }
+                
+                console.log('Processed cases array:', casesArray);
+                casesData = casesArray;
+                
+                console.log('Cases loaded:', casesArray);
+                renderCases(casesArray);
+                showNotification('Cases loaded successfully!', 'success');
+                
+            } catch (error) {
+                console.error('Error loading cases:', error);
+                showNotification(`Failed to load cases: ${error.message}`, 'error');
+                
+                // Show error state
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-exclamation-triangle empty-icon"></i>
+                        <h3>Failed to Load Cases</h3>
+                        <p>There was an error loading your cases. Please try again.</p>
+                        <button class="refresh-btn" onclick="loadCases()" style="margin-top: 1rem;">
+                            <i class="fas fa-retry"></i> Retry
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        // Render cases in the UI
+        function renderCases(cases) {
+            const container = document.getElementById('casesContainer');
+            
+            // Clear and rebuild case numbers array
+            caseNumbers = [];
+            
+            if (!cases || cases.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-folder-open empty-icon"></i>
+                        <h3>No Cases Found</h3>
+                        <p>You haven't created any cases yet. Upload your first case to get started.</p>
+                        <a href="fileupload.html" class="refresh-btn" style="margin-top: 1rem; text-decoration: none;">
+                            <i class="fas fa-upload"></i> Upload First Case
+                        </a>
+                    </div>
+                `;
+                return;
+            }
+
+            const casesHTML = cases.map(caseItem => {
+                const caseNumber = caseItem.case_number || 'Unknown';
+                const caseTitle = caseItem.case_title || 'Untitled Case';
+                const courtName = caseItem.court_name || 'Unknown Court';
+                const caseType = caseItem.case_type || 'Unknown Type';
+                const filingDate = caseItem.filing_date ? new Date(caseItem.filing_date).toLocaleDateString() : 'Unknown Date';
+                const status = caseItem.status || 'Unknown';
+                const description = caseItem.description || 'No description available';
+                const clientId = caseItem.client_id || 'Unknown';
+                
+                // Store case number for chatbot access
+                if (caseNumber !== 'Unknown') {
+                    caseNumbers.push(caseNumber);
+                }
+                
+                // Determine status styling
+                let statusClass = 'pending';
+                let statusText = status;
+                
+                // Map all possible status values to appropriate CSS classes
+                switch(status.toLowerCase()) {
+                    case 'active':
+                    case 'ongoing':
+                        statusClass = 'processing';
+                        break;
+                    case 'closed':
+                    case 'resolved':
+                        statusClass = 'processed';
+                        break;
+                    case 'pending':
+                        statusClass = 'pending';
+                        break;
+                    case 'on hold':
+                        statusClass = 'on-hold';
+                        break;
+                    case 'appeal':
+                        statusClass = 'appeal';
+                        break;
+                    default:
+                        statusClass = 'pending'; // Default fallback
+                }
+
+                return `
+                    <div class="case-item" data-case-number="${caseNumber}" data-case-title="${caseTitle}" data-case-type="${caseType}">
+                        <div class="case-header" onclick="toggleCase('case-${caseNumber}')">
+                            <div class="case-title">
+                                <span class="case-number">Case-${caseNumber}</span>
+                                <span>${caseTitle}</span>
+                            </div>
+                            <div class="case-status">
+                                <span class="status-dot status-${statusClass}"></span>
+                                <span>${statusText}</span>
+                                <i class="fas fa-chevron-down dropdown-icon"></i>
+                            </div>
+                        </div>
+                        <div class="case-content" id="case-${caseNumber}">
+                            <div class="case-details">
+                                <div class="case-info-grid">
+                                    <div class="info-card">
+                                        <div class="info-card-title">
+                                            <i class="fas fa-info-circle"></i>
+                                            Case Information
+                                        </div>
+                                        <div class="info-card-content">
+                                            <strong>Case Number:</strong> ${caseNumber}<br>
+                                            <strong>Case Title:</strong> ${caseTitle}<br>
+                                            <strong>Court:</strong> ${courtName}<br>
+                                            <strong>Case Type:</strong> ${caseType}<br>
+                                            <strong>Filing Date:</strong> ${filingDate}<br>
+                                            <strong>Status:</strong> ${statusText}<br>
+                                            <strong>Client ID:</strong> ${clientId}
+                                        </div>
+                                    </div>
+                                    <div class="info-card">
+                                        <div class="info-card-title">
+                                            <i class="fas fa-file-alt"></i>
+                                            Case Details
+                                        </div>
+                                        <div class="info-card-content">
+                                            <strong>Description:</strong><br>
+                                            ${description}
+                                        </div>
+                                    </div>
+                                    <div class="info-card">
+                                        <div class="info-card-title">
+                                            <i class="fas fa-tools"></i>
+                                            Actions
+                                        </div>
+                                        <div class="info-card-content">
+                                            <button class="update-case-btn" onclick="openUpdateCaseModal('${caseItem.case_number}')">
+                                                <i class="fas fa-edit"></i>
+                                                Update Case
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            container.innerHTML = casesHTML;
+            
+            // Log stored case numbers for debugging
+            console.log('Stored case numbers for chatbot:', caseNumbers);
+            console.log('Cases data stored:', casesData);
+        }
+
+        // Render case analysis content (could be RAG analysis or other analysis data)
+        function renderCaseAnalysis(caseItem) {
+            // Always render empty analysis section for now
+            return renderEmptyAnalysis();
+        }
+
+        // Render empty analysis content
+        function renderEmptyAnalysis() {
+            return `
+                <div class="rag-analysis">
+                    <div class="rag-title">
+                        <i class="fas fa-robot"></i>
+                        AI Analysis
+                    </div>
+                    <div class="rag-content">
+                        <p style="color: var(--gray-dark); font-style: italic;">
+                            AI analysis will appear here once available.
+                        </p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Render pending analysis state
+        function renderPendingAnalysis() {
+            return `
+                <div class="rag-analysis">
+                    <div class="rag-title">
+                        <i class="fas fa-clock"></i>
+                        AI Analysis Status
+                    </div>
+                    <div class="rag-content">
+                        <p>🔄 Your case is currently being processed by our AI system.</p>
+                        <p>The analysis will include:</p>
+                        <ul class="key-points">
+                            <li>Key legal points extraction</li>
+                            <li>Case summary and timeline</li>
+                            <li>Important dates and deadlines</li>
+                            <li>Relevant legal precedents</li>
+                            <li>Recommended actions</li>
+                        </ul>
+                        <p style="margin-top: 1rem;"><em>Please check back in a few minutes for the complete analysis.</em></p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Toggle case dropdown
+        function toggleCase(caseId) {
+            const header = document.querySelector(`[onclick="toggleCase('${caseId}')"]`);
+            const content = document.getElementById(caseId);
+            
+            if (!header || !content) return;
+            
+            const isExpanded = content.classList.contains('expanded');
+            
+            // Close all other cases
+            document.querySelectorAll('.case-content.expanded').forEach(el => {
+                el.classList.remove('expanded');
+            });
+            document.querySelectorAll('.case-header.active').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // Toggle current case
+            if (!isExpanded) {
+                content.classList.add('expanded');
+                header.classList.add('active');
+                
+                // Extract case number from caseId (remove 'case-' prefix)
+                const caseNumber = caseId.replace('case-', '');
+                currentActiveCaseNumber = caseNumber;
+                
+                console.log('Active case number set to:', currentActiveCaseNumber);
+            } else {
+                currentActiveCaseNumber = null;
+            }
+        }
+
+        // Initialize chat for a specific case
+        function initializeChatForCase(caseNumber, caseTitle) {
+            currentActiveCaseNumber = caseNumber;
+            
+            // Get case data for the chatbot
+            const caseData = getCaseDataByNumber(caseNumber);
+            
+            console.log('Initializing chat for case:', caseNumber);
+            console.log('Case data:', caseData);
+            
+            // Here you can initialize your chatbot with the case context
+            showNotification(`Chat initialized for Case-${caseNumber}: ${caseTitle}`, 'success');
+            
+            // You can expand this to open a chat modal or redirect to a chat page
+            // For now, we'll just show that the case is selected for chat
+        }
+
+        // Helper function to get case data by case number
+        function getCaseDataByNumber(caseNumber) {
+            return casesData.find(caseItem => 
+                (caseItem.case_number || '').toString() === caseNumber.toString()
+            );
+        }
+
+        // Helper function to get all case numbers (for chatbot dropdown/selection)
+        function getAllCaseNumbers() {
+            return caseNumbers;
+        }
+
+        // Helper function to get currently active case number
+        function getCurrentActiveCaseNumber() {
+            return currentActiveCaseNumber;
+        }
+
+        // Helper function to get case context for chatbot
+        function getCaseContextForChat(caseNumber = null) {
+            const targetCaseNumber = caseNumber || currentActiveCaseNumber;
+            
+            if (!targetCaseNumber) {
+                return null;
+            }
+            
+            const caseData = getCaseDataByNumber(targetCaseNumber);
+            
+            if (!caseData) {
+                return null;
+            }
+            
+            return {
+                caseNumber: targetCaseNumber,
+                caseTitle: caseData.case_title || 'Untitled Case',
+                courtName: caseData.court_name || 'Unknown Court',
+                caseType: caseData.case_type || 'Unknown Type',
+                status: caseData.status || 'Unknown',
+                description: caseData.description || 'No description available',
+                filingDate: caseData.filing_date || null,
+                clientId: caseData.client_id || 'Unknown',
+                analysis: caseData.rag_analysis || caseData.analysis || caseData.ai_analysis || null
+            };
+        }
+
+        // Show notification
+        function showNotification(message, type = 'info') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Chatbot functionality
+        function toggleChatbot() {
+            // For now, just minimize/maximize. You can implement hide/show functionality
+            console.log('Chatbot toggle clicked');
+        }
+
+        function sendQuickMessage(message) {
+            // Add user message
+            addChatMessage(message, 'user');
+            
+            // Clear input
+            document.getElementById('chatInput').value = '';
+            
+            // Show typing indicator and respond
+            showTypingIndicator();
+            
+            setTimeout(() => {
+                hideTypingIndicator();
+                
+                // Get appropriate response based on message
+                let response = getBotResponse(message);
+                addChatMessage(response, 'bot');
+            }, 1500);
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Add user message
+            addChatMessage(message, 'user');
+            
+            // Check if user has selected a case
+            if (selectedCaseForChat) {
+                // User has selected a case, send both case number and prompt to backend
+                console.log('Sending to backend:');
+                console.log('Case Number:', selectedCaseForChat);
+                console.log('User Prompt:', message);
+                
+                // Send to backend API
+                sendToBackend(selectedCaseForChat, message);
+                
+                // Clear input
+                input.value = '';
+                
+            } else {
+                // No case selected, handle as regular chat
+                // Clear input
+                input.value = '';
+                
+                // Show typing indicator and respond
+                showTypingIndicator();
+                
+                setTimeout(() => {
+                    hideTypingIndicator();
+                    
+                    // Get appropriate response based on message
+                    let response = getBotResponse(message);
+                    addChatMessage(response, 'bot');
+                }, 1500);
+            }
+        }
+
+        // Send query to backend API
+        async function sendToBackend(caseNumber, userQuestion) {
+            // Show typing indicator
+            showTypingIndicator();
+            
+            try {
+                const token = localStorage.getItem(CONFIG.STORAGE_KEYS.AUTH_TOKEN);
+                const response = await fetch(CONFIG.API_BASE_URL + CONFIG.API_ENDPOINTS.RAG_QUERY, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        "question": userQuestion,
+                        "case_number": caseNumber
+                    })
+                });
+
+                hideTypingIndicator();
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                console.log('Backend response:', data);
+                
+                // Parse and format the complex JSON response
+                const botResponse = parseComplexResponse(data);
+                addChatMessage(botResponse, 'bot');
+                
+            } catch (error) {
+                hideTypingIndicator();
+                console.error('Error sending to backend:', error);
+                
+                let errorMessage = 'Sorry, I encountered an error while processing your request.';
+                
+                if (error.message.includes('Failed to fetch')) {
+                    errorMessage = 'Unable to connect to the server. Please check your internet connection.';
+                } else if (error.message.includes('401')) {
+                    errorMessage = 'Authentication failed. Please try logging in again.';
+                } else if (error.message.includes('500')) {
+                    errorMessage = 'Server error. Please try again later.';
+                }
+                
+                addChatMessage(errorMessage, 'bot');
+            }
+        }
+
+        function handleChatInputKeypress(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                sendChatMessage();
+            }
+        }
+
+        // Function to parse complex JSON response from RAG chatbot
+        function parseComplexResponse(data) {
+            try {
+                console.log('Parsing response data:', data);
+                console.log('Data type:', typeof data);
+                console.log('Data keys:', Object.keys(data || {}));
+                
+                // If it's a simple string response
+                if (typeof data === 'string') {
+                    console.log('Returning string response');
+                    return data;
+                }
+                
+                // If it has a direct answer property that's a string
+                if (data.answer && typeof data.answer === 'string') {
+                    console.log('Returning direct answer string');
+                    return data.answer;
+                }
+                
+                // Check for the nested response structure first (your API format)
+                if (data.response && typeof data.response === 'object') {
+                    console.log('Found nested response object, parsing it');
+                    return parseComplexResponse(data.response);
+                }
+                
+                // If it has response or message properties as strings
+                if (data.response && typeof data.response === 'string') {
+                    console.log('Returning response string');
+                    return data.response;
+                }
+                
+                // Check for nested data structures
+                if (data.data && typeof data.data === 'object') {
+                    console.log('Found nested data object, recursing');
+                    return parseComplexResponse(data.data);
+                }
+                
+                // Helper function to validate and clean item
+                const isValidItem = (item) => {
+                    if (!item) return false;
+                    const str = String(item);
+                    if (str === 'NaN' || str === 'null' || str === 'undefined' || str === '[object Object]') return false;
+                    return str.trim().length > 0;
+                };
+
+                // Helper function to extract text from objects
+                const extractText = (item) => {
+                    if (typeof item === 'string') {
+                        return item.trim();
+                    }
+                    if (typeof item === 'object' && item !== null) {
+                        // Try common properties that might contain the text
+                        if (item.text) return String(item.text).trim();
+                        if (item.content) return String(item.content).trim();
+                        if (item.description) return String(item.description).trim();
+                        if (item.value) return String(item.value).trim();
+                        if (item.title) return String(item.title).trim();
+                        
+                        // If it's an object with a single property, try to extract that
+                        const keys = Object.keys(item);
+                        if (keys.length === 1) {
+                            return String(item[keys[0]]).trim();
+                        }
+                        
+                        // As a last resort, try to find any string property
+                        for (const key of keys) {
+                            const value = item[key];
+                            if (typeof value === 'string' && value.trim().length > 0) {
+                                return value.trim();
+                            }
+                        }
+                        
+                        // If all else fails, stringify the object
+                        return JSON.stringify(item);
+                    }
+                    return String(item).trim();
+                };
+
+                // Special function for IPC section to show section number + description
+                const extractIPCText = (item) => {
+                    if (typeof item === 'string') {
+                        return item.trim();
+                    }
+                    if (typeof item === 'object' && item !== null) {
+                        const keys = Object.keys(item).filter(key => key !== 'length'); // Filter out array length property
+                        
+                        if (keys.length > 0) {
+                            // For IPC, combine section name with description
+                            return keys.map(key => {
+                                const value = item[key];
+                                if (typeof value === 'string' && value.trim().length > 0) {
+                                    return `${key}: ${value.trim()}`;
+                                }
+                                return `${key}: ${String(value).trim()}`;
+                            }).join('; ');
+                        }
+                        
+                        // Fallback to regular extraction
+                        return extractText(item);
+                    }
+                    return String(item).trim();
+                };
+
+                // Parse complex JSON structure (like your case)
+                let formattedResponse = '';
+                
+                // Handle CPC section
+                if (data.CPC && Array.isArray(data.CPC) && data.CPC.length > 0) {
+                    const processedCPC = data.CPC.map(extractText).filter(isValidItem);
+                    if (processedCPC.length > 0) {
+                        formattedResponse += '📚 **CPC (Civil Procedure Code):**\n';
+                        processedCPC.forEach((item, index) => {
+                            formattedResponse += `${index + 1}. ${item}\n`;
+                        });
+                        formattedResponse += '\n';
+                    }
+                }
+                
+                // Handle CRPC section
+                if (data.CRPC && Array.isArray(data.CRPC) && data.CRPC.length > 0) {
+                    const processedCRPC = data.CRPC.map(extractText).filter(isValidItem);
+                    if (processedCRPC.length > 0) {
+                        formattedResponse += '⚖️ **CRPC (Criminal Procedure Code):**\n';
+                        processedCRPC.forEach((item, index) => {
+                            formattedResponse += `${index + 1}. ${item}\n`;
+                        });
+                        formattedResponse += '\n';
+                    }
+                }
+                
+                // Handle IPC section
+                if (data.IPC && Array.isArray(data.IPC) && data.IPC.length > 0) {
+                    const processedIPC = data.IPC.map(extractIPCText).filter(isValidItem);
+                    if (processedIPC.length > 0) {
+                        formattedResponse += '🔒 **IPC (Indian Penal Code):**\n';
+                        processedIPC.forEach((item, index) => {
+                            formattedResponse += `${index + 1}. ${item}\n`;
+                        });
+                        formattedResponse += '\n';
+                    }
+                }
+                
+                // Handle Supreme Court cases
+                if (data.Supreme && Array.isArray(data.Supreme) && data.Supreme.length > 0) {
+                    const processedSupreme = data.Supreme.map(extractText).filter(isValidItem);
+                    if (processedSupreme.length > 0) {
+                        formattedResponse += '🏛️ **Supreme Court Cases:**\n';
+                        processedSupreme.forEach((caseItem, index) => {
+                            formattedResponse += `${index + 1}. ${caseItem}\n`;
+                        });
+                        formattedResponse += '\n';
+                    }
+                }
+                
+                // Handle answer array (fallback)
+                if (data.answer && Array.isArray(data.answer) && data.answer.length > 0) {
+                    const processedAnswers = data.answer.map(extractText).filter(isValidItem);
+                    if (processedAnswers.length > 0) {
+                        formattedResponse += '💡 **Answer:**\n';
+                        processedAnswers.forEach((item, index) => {
+                            formattedResponse += `${index + 1}. ${item}\n`;
+                        });
+                    }
+                }
+                
+                // If no content was found, try to stringify the entire object for debugging
+                if (!formattedResponse.trim()) {
+                    console.log('No formatted content found, returning JSON string');
+                    
+                    // Try to find any meaningful content in the object
+                    const jsonString = JSON.stringify(data, null, 2);
+                    if (jsonString && jsonString !== '{}' && jsonString !== 'null') {
+                        return `📋 **Response Data:**\n${jsonString}`;
+                    }
+                    
+                    return 'I received your query but got an unexpected response format. Please try rephrasing your question.';
+                }
+                
+                console.log('Returning formatted response:', formattedResponse);
+                return formattedResponse.trim();
+                
+            } catch (error) {
+                console.error('Error parsing complex response:', error);
+                return 'Sorry, I encountered an error while formatting the response. Please try again.';
+            }
+        }
+
+        function addChatMessage(message, sender) {
+            const chatMessages = document.getElementById('chatMessages');
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            
+            // Handle formatted text with line breaks and basic markdown-style formatting
+            if (sender === 'bot' && message.includes('\n')) {
+                // Convert line breaks to HTML and handle basic formatting
+                let formattedMessage = message
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // **bold** to <strong>
+                    .replace(/\n/g, '<br>') // line breaks to <br>
+                    .replace(/(\d+\.\s)/g, '<span style="color: var(--light-blue); font-weight: 600;">$1</span>'); // Number lists
+                
+                messageDiv.innerHTML = formattedMessage;
+            } else {
+                messageDiv.textContent = message;
+            }
+            
+            chatMessages.appendChild(messageDiv);
+            
+            // Save message to localStorage
+            saveChatMessage(message, sender);
+            
+            // Scroll to bottom
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Save chat message to localStorage
+        function saveChatMessage(message, sender) {
+            try {
+                console.log('Saving chat message:', {message, sender});
+                const chatHistory = JSON.parse(localStorage.getItem(CHAT_STORAGE_KEY) || '[]');
+                console.log('Current chat history length:', chatHistory.length);
+                
+                chatHistory.push({
+                    message: message,
+                    sender: sender,
+                    timestamp: new Date().toISOString()
+                });
+                
+                // Keep only last 50 messages to avoid storage bloat
+                if (chatHistory.length > CONFIG.MAX_CHAT_HISTORY) {
+                    chatHistory.splice(0, chatHistory.length - CONFIG.MAX_CHAT_HISTORY);
+                }
+                
+                localStorage.setItem(CHAT_STORAGE_KEY, JSON.stringify(chatHistory));
+                console.log('Chat message saved. New history length:', chatHistory.length);
+            } catch (error) {
+                console.warn('Failed to save chat message:', error);
+            }
+        }
+
+        // Load chat history from localStorage
+        function loadChatHistory() {
+            try {
+                console.log('Loading chat history...');
+                const chatHistory = JSON.parse(localStorage.getItem(CHAT_STORAGE_KEY) || '[]');
+                const savedSelectedCase = localStorage.getItem(SELECTED_CASE_KEY);
+                
+                console.log('Chat history loaded:', chatHistory);
+                console.log('Saved selected case:', savedSelectedCase);
+                
+                // Restore selected case
+                if (savedSelectedCase) {
+                    selectedCaseForChat = savedSelectedCase;
+                    console.log('Restored selected case:', selectedCaseForChat);
+                }
+                
+                const chatMessages = document.getElementById('chatMessages');
+                
+                // Clear default welcome message if we have history
+                if (chatHistory.length > 0) {
+                    console.log('Clearing default messages and loading', chatHistory.length, 'saved messages');
+                    chatMessages.innerHTML = '';
+                } else {
+                    console.log('No chat history found, keeping default message');
+                }
+                
+                // Restore messages
+                chatHistory.forEach((item, index) => {
+                    console.log('Loading message', index + 1, ':', item);
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = `message ${item.sender}`;
+                    
+                    // Apply the same formatting as addChatMessage function
+                    if (item.sender === 'bot' && item.message.includes('\n')) {
+                        // Convert line breaks to HTML and handle basic formatting
+                        let formattedMessage = item.message
+                            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // **bold** to <strong>
+                            .replace(/\n/g, '<br>') // line breaks to <br>
+                            .replace(/(\d+\.\s)/g, '<span style="color: var(--light-blue); font-weight: 600;">$1</span>'); // Number lists
+                        
+                        messageDiv.innerHTML = formattedMessage;
+                    } else {
+                        messageDiv.textContent = item.message;
+                    }
+                    
+                    chatMessages.appendChild(messageDiv);
+                });
+                
+                // Scroll to bottom
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                console.log('Chat history loading completed');
+                
+            } catch (error) {
+                console.warn('Failed to load chat history:', error);
+            }
+        }
+
+        function showTypingIndicator() {
+            const indicator = document.getElementById('typingIndicator');
+            const chatMessages = document.getElementById('chatMessages');
+            
+            indicator.style.display = 'block';
+            chatMessages.appendChild(indicator);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function hideTypingIndicator() {
+            const indicator = document.getElementById('typingIndicator');
+            indicator.style.display = 'none';
+        }
+
+        function getBotResponse(userMessage) {
+            const message = userMessage.toLowerCase();
+            
+            // Case-related responses
+            if (message.includes('case') && message.includes('status')) {
+                if (caseNumbers.length > 0) {
+                    // Display case numbers as clickable options
+                    setTimeout(() => {
+                        addCaseSelectionButtons();
+                    }, 500);
+                    return `I can help you check case status. Please select a case from the options below:`;
+                } else {
+                    return "You don't have any cases uploaded yet. Please upload a case file first to check its status.";
+                }
+            }
+            
+            if (message.includes('uzur') || message.includes('needs')) {
+                return "I can help you understand legal requirements and procedures. What specific legal matter do you need assistance with?";
+            }
+            
+            if (message.includes('case') && (message.includes('find') || message.includes('search'))) {
+                if (caseNumbers.length > 0) {
+                    const caseList = caseNumbers.map(num => {
+                        const caseData = getCaseDataByNumber(num);
+                        return `Case-${num}: ${caseData?.case_title || 'Untitled'}`;
+                    }).join('\n');
+                    return `Here are your cases:\n${caseList}\n\nClick on any case above to expand and view details.`;
+                } else {
+                    return "You don't have any cases yet. Upload your first case using the 'Upload File' option.";
+                }
+            }
+            
+            if (message.includes('help')) {
+                return "I can assist you with:\n• Checking case status\n• Finding case information\n• Legal procedure guidance\n• Document requirements\n\nWhat would you like help with?";
+            }
+            
+            if (message.includes('hello') || message.includes('hi')) {
+                return "Hello! I'm here to help you with your legal cases. How can I assist you today?";
+            }
+            
+            // Default response
+            return "I understand you're asking about legal matters. Could you please be more specific? I can help with case status, legal procedures, or document requirements.";
+        }
+
+        // Add case selection buttons to chat
+        function addCaseSelectionButtons() {
+            const chatMessages = document.getElementById('chatMessages');
+            
+            // Create container for case buttons
+            const caseOptionsDiv = document.createElement('div');
+            caseOptionsDiv.className = 'case-selection-container';
+            caseOptionsDiv.style.cssText = `
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                margin: 0.5rem 0;
+                max-width: 85%;
+            `;
+            
+            // Add case number buttons
+            caseNumbers.forEach(caseNum => {
+                const caseData = getCaseDataByNumber(caseNum);
+                
+                const caseButton = document.createElement('button');
+                caseButton.textContent = `${caseNum}`;
+                caseButton.className = 'case-selection-btn';
+                caseButton.style.cssText = `
+                    background: var(--gold-soft);
+                    color: var(--navy);
+                    border: 1px solid var(--gold);
+                    padding: 0.75rem;
+                    border-radius: var(--radius-sm);
+                    cursor: pointer;
+                    transition: all var(--transition-speed);
+                    text-align: center;
+                    font-size: 0.9rem;
+                    font-weight: 600;
+                `;
+                
+                // Add hover effect
+                caseButton.onmouseover = () => {
+                    caseButton.style.background = 'var(--gold)';
+                    caseButton.style.color = 'var(--white)';
+                };
+                caseButton.onmouseout = () => {
+                    caseButton.style.background = 'var(--gold-soft)';
+                    caseButton.style.color = 'var(--navy)';
+                };
+                
+                // Add click handler
+                caseButton.onclick = () => {
+                    const caseTitle = caseData?.case_title || 'Untitled Case';
+                    selectCaseForStatus(caseNum, caseTitle);
+                };
+                
+                caseOptionsDiv.appendChild(caseButton);
+            });
+            
+            chatMessages.appendChild(caseOptionsDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Handle case selection for status check
+        function selectCaseForStatus(caseNumber, caseTitle) {
+            // Store selected case for future queries
+            selectedCaseForChat = caseNumber;
+            
+            // Save selected case to localStorage
+            localStorage.setItem(SELECTED_CASE_KEY, caseNumber);
+            
+            // Add user selection message
+            addChatMessage(`Selected: Case ${caseNumber}`, 'user');
+            
+            // Remove case selection buttons
+            const caseContainer = document.querySelector('.case-selection-container');
+            if (caseContainer) {
+                caseContainer.remove();
+            }
+            
+            // Show typing indicator briefly
+            showTypingIndicator();
+            
+            setTimeout(() => {
+                hideTypingIndicator();
+                
+                // Just confirm selection and prompt for user input
+                addChatMessage(`Great! I've selected Case ${caseNumber} for you. Please type your question about this case and I'll help you.`, 'bot');
+            }, 1000);
+        }
+
+        // Modal functions for Add Case
+        async function openAddCaseModal() {
+            document.getElementById('addCaseModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            
+            // Set today's date as default filing date
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('filingDate').value = today;
+            
+            // Load clients for the dropdown
+            await loadClientsForDropdown();
+        }
+
+        // Load clients for dropdown selection
+        async function loadClientsForDropdown() {
+            const clientSelect = document.getElementById('clientSelect');
+            
+            try {
+                const token = localStorage.getItem(CONFIG.STORAGE_KEYS.AUTH_TOKEN);
+                const response = await fetch('http://localhost:3000/nyayasetu/api/clients', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const clientsData = await response.json();
+                console.log('Clients loaded:', clientsData);
+
+                // Clear existing options
+                clientSelect.innerHTML = '<option value="">Select a client</option>';
+
+                // Handle different response structures
+                let clients = [];
+                if (Array.isArray(clientsData)) {
+                    clients = clientsData;
+                } else if (clientsData.clients && Array.isArray(clientsData.clients)) {
+                    clients = clientsData.clients;
+                } else if (clientsData.data && Array.isArray(clientsData.data)) {
+                    clients = clientsData.data;
+                }
+
+                // Populate dropdown with clients
+                clients.forEach(client => {
+                    const option = document.createElement('option');
+                    option.value = client.client_id || client.id || client._id;
+                    
+                    // Try different possible name fields
+                    const clientName = client.client_name || client.name || client.full_name || client.firstName || `Client ${option.value}`;
+                    option.textContent = clientName;
+                    
+                    clientSelect.appendChild(option);
+                });
+
+                if (clients.length === 0) {
+                    clientSelect.innerHTML = '<option value="">No clients found</option>';
+                }
+
+            } catch (error) {
+                console.error('Error loading clients:', error);
+                clientSelect.innerHTML = '<option value="">Error loading clients</option>';
+                showNotification('Failed to load clients. Please try again.', 'error');
+            }
+        }
+
+        function closeAddCaseModal() {
+            document.getElementById('addCaseModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            document.getElementById('addCaseForm').reset();
+        }
+
+        // Add new case function
+        async function addCase() {
+            const form = document.getElementById('addCaseForm');
+            const submitBtn = document.getElementById('addCaseSubmitBtn');
+            
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+
+            try {
+                // Collect form data
+                const formData = {
+                    client_id: parseInt(document.getElementById('clientSelect').value),
+                    case_number: document.getElementById('caseNumber').value.trim(),
+                    case_title: document.getElementById('caseTitle').value.trim(),
+                    court_name: document.getElementById('courtName').value.trim(),
+                    case_type: document.getElementById('caseType').value,
+                    filing_date: document.getElementById('filingDate').value,
+                    status: document.getElementById('status').value,
+                    description: document.getElementById('description').value.trim()
+                };
+
+                console.log('Sending case data:', formData);
+
+                const token = localStorage.getItem(CONFIG.STORAGE_KEYS.AUTH_TOKEN);
+                const response = await fetch('http://localhost:3000//nyayasetu/api/cases', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.text();
+                    throw new Error(`HTTP ${response.status}: ${errorData}`);
+                }
+
+                const result = await response.json();
+                console.log('Case added successfully:', result);
+                
+                showNotification('Case added successfully!', 'success');
+                closeAddCaseModal();
+                loadCases(); // Refresh the cases list
+
+            } catch (error) {
+                console.error('Error adding case:', error);
+                showNotification(`Failed to add case: ${error.message}`, 'error');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit';
+            }
+        }
+
+        // Show notification function
+        function showNotification(message, type = 'info') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Update Case Modal functions
+        let currentCaseNumber = null;
+        let currentCaseId = null;
+
+        async function openUpdateCaseModal(caseNumber) {
+            currentCaseNumber = caseNumber;
+            console.log('Opening update modal for case number:', caseNumber);
+            document.getElementById('updateCaseModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            
+            // Load clients for the dropdown
+            await loadClientsForUpdateDropdown();
+            
+            // Load case details and prefill the form
+            await loadCaseDetailsForUpdate(caseNumber);
+        }
+
+        function closeUpdateCaseModal() {
+            document.getElementById('updateCaseModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            document.getElementById('updateCaseForm').reset();
+            currentCaseNumber = null;
+            currentCaseId = null;
+        }
+
+        // Load clients for update dropdown
+        async function loadClientsForUpdateDropdown() {
+            const clientSelect = document.getElementById('updateClientSelect');
+            
+            try {
+                const token = localStorage.getItem(CONFIG.STORAGE_KEYS.AUTH_TOKEN);
+                const response = await fetch('http://localhost:3000/nyayasetu/api/clients', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const clientsData = await response.json();
+
+                // Clear existing options
+                clientSelect.innerHTML = '<option value="">Select a client</option>';
+
+                // Handle different response structures
+                let clients = [];
+                if (Array.isArray(clientsData)) {
+                    clients = clientsData;
+                } else if (clientsData.clients && Array.isArray(clientsData.clients)) {
+                    clients = clientsData.clients;
+                } else if (clientsData.data && Array.isArray(clientsData.data)) {
+                    clients = clientsData.data;
+                }
+
+                // Populate dropdown with clients
+                clients.forEach(client => {
+                    const option = document.createElement('option');
+                    option.value = client.client_id || client.id || client._id;
+                    
+                    const clientName = client.client_name || client.name || client.full_name || client.firstName || `Client ${option.value}`;
+                    option.textContent = clientName;
+                    
+                    clientSelect.appendChild(option);
+                });
+
+            } catch (error) {
+                console.error('Error loading clients for update:', error);
+                clientSelect.innerHTML = '<option value="">Error loading clients</option>';
+            }
+        }
+
+        // Load case details and prefill form
+        async function loadCaseDetailsForUpdate(caseNumber) {
+            try {
+                const token = localStorage.getItem(CONFIG.STORAGE_KEYS.AUTH_TOKEN);
+                const response = await fetch(`http://localhost:3000/nyayasetu/api/cases/case-number/${caseNumber}`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const caseData = await response.json();
+                console.log('Case details for update:', caseData);
+
+                // Extract case details from response
+                const caseDetails = caseData.case || caseData.data || caseData;
+                
+                // Store the case ID for updates
+                currentCaseId = caseDetails.case_id || caseDetails.id || caseDetails._id;
+
+                // Prefill form fields
+                document.getElementById('updateClientSelect').value = caseDetails.client_id || '';
+                document.getElementById('updateCaseNumber').value = caseDetails.case_number || '';
+                document.getElementById('updateCaseTitle').value = caseDetails.case_title || '';
+                document.getElementById('updateCourtName').value = caseDetails.court_name || '';
+                document.getElementById('updateCaseType').value = caseDetails.case_type || '';
+                document.getElementById('updateFilingDate').value = caseDetails.filing_date || '';
+                document.getElementById('updateStatus').value = caseDetails.status || '';
+                document.getElementById('updateDescription').value = caseDetails.description || '';
+
+            } catch (error) {
+                console.error('Error loading case details:', error);
+                showNotification('Failed to load case details. Please try again.', 'error');
+            }
+        }
+
+        // Update case function
+        async function updateCase() {
+            const form = document.getElementById('updateCaseForm');
+            const submitBtn = document.getElementById('updateCaseSubmitBtn');
+            
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            if (!currentCaseNumber) {
+                showNotification('Case number not found. Please try again.', 'error');
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Updating...';
+
+            try {
+                // Collect form data
+                const formData = {
+                    client_id: parseInt(document.getElementById('updateClientSelect').value),
+                    case_number: document.getElementById('updateCaseNumber').value.trim(),
+                    case_title: document.getElementById('updateCaseTitle').value.trim(),
+                    court_name: document.getElementById('updateCourtName').value.trim(),
+                    case_type: document.getElementById('updateCaseType').value,
+                    filing_date: document.getElementById('updateFilingDate').value,
+                    status: document.getElementById('updateStatus').value,
+                    description: document.getElementById('updateDescription').value.trim()
+                };
+
+                // Log details specifically for status update debugging
+                const selectedStatus = document.getElementById('updateStatus').value;
+                console.log('Selected status value:', selectedStatus);
+                console.log('Updating case data:', formData);
+                console.log('Using case number:', currentCaseNumber);
+
+                const token = localStorage.getItem(CONFIG.STORAGE_KEYS.AUTH_TOKEN);
+                const response = await fetch(`http://localhost:3000/nyayasetu/api/cases/case-number/${currentCaseNumber}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.text();
+                    throw new Error(`HTTP ${response.status}: ${errorData}`);
+                }
+
+                const result = await response.json();
+                console.log('Case updated successfully:', result);
+                
+                showNotification('Case updated successfully!', 'success');
+                closeUpdateCaseModal();
+                loadCases(); // Refresh the cases list
+
+            } catch (error) {
+                console.error('Error updating case:', error);
+                showNotification(`Failed to update case: ${error.message}`, 'error');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-save"></i> Update';
+            }
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const addModal = document.getElementById('addCaseModal');
+            const updateModal = document.getElementById('updateCaseModal');
+            
+            if (event.target === addModal) {
+                closeAddCaseModal();
+            }
+            
+            if (event.target === updateModal) {
+                closeUpdateCaseModal();
+            }
+        }
+    </script>
+</body>
+</html>

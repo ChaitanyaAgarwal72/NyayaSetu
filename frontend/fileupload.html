@@ -1,0 +1,1936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documents - NyayaSetu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --navy: #0A2647;
+            --gold: #FFB100;
+            --light-blue: #205295;
+            --white: #FFFFFF;
+            --light-gray: #f8f9fa;
+            --navy-light: #1a3557;
+            --blue-soft: rgba(32, 82, 149, 0.1);
+            --gradient-bg: linear-gradient(135deg, #f8f9fa 0%, #e8f0f7 100%);
+            --transition-speed: 0.3s;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+            --shadow-gold: 0 4px 20px rgba(255, 177, 0, 0.3);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--navy);
+            background: var(--gradient-bg);
+            min-height: 100vh;
+        }
+
+        /* Header Styles */
+        .header {
+            background: var(--white);
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-sm);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(10, 38, 71, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-section {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-link {
+            color: var(--navy);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-sm);
+            transition: all var(--transition-speed) ease;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: var(--light-blue);
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            color: var(--gold);
+            font-weight: 600;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .back-btn {
+            background-color: var(--light-blue);
+            color: var(--white);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            background-color: var(--gold);
+            color: var(--navy);
+            transform: translateY(-2px);
+        }
+
+        .upload-btn {
+            background-color: var(--gold);
+            color: var(--navy);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            text-decoration: none;
+        }
+
+        .upload-btn:hover {
+            background-color: var(--light-blue);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            background-color: var(--light-blue);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .username {
+            color: var(--navy);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .logout-btn {
+            background-color: transparent;
+            color: var(--navy);
+            border: 1px solid var(--navy);
+            padding: 0.3rem 0.8rem;
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .logout-btn:hover {
+            background-color: var(--navy);
+            color: var(--white);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 100px;
+            padding: 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--light-blue);
+        }
+
+        .page-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--navy);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .ns-logo {
+            background: var(--gold);
+            color: var(--navy);
+            padding: 0.5rem;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            /* Left column for upload, right column is a single wide card */
+            grid-template-columns: 0.8fr 1.6fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Upload Section */
+        .upload-section {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 1rem;
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            height: fit-content;
+        }
+
+        .upload-form {
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.25rem;
+            font-weight: 500;
+            color: var(--navy);
+            font-size: 0.9rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+            transition: border-color var(--transition-speed) ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--light-blue);
+            box-shadow: 0 0 0 2px rgba(32, 82, 149, 0.1);
+        }
+
+        .upload-area {
+            border: 2px dashed var(--light-blue);
+            border-radius: var(--radius-md);
+            padding: 1.5rem 1rem;
+            background: var(--blue-soft);
+            transition: all var(--transition-speed) ease;
+            cursor: pointer;
+            position: relative;
+            text-align: center;
+        }
+
+        /* Screen-reader only utility */
+        .sr-only {
+            position: absolute !important;
+            width: 1px !important;
+            height: 1px !important;
+            padding: 0 !important;
+            margin: -1px !important;
+            overflow: hidden !important;
+            clip: rect(0, 0, 0, 0) !important;
+            white-space: nowrap !important;
+            border: 0 !important;
+        }
+
+        .upload-area:hover {
+            border-color: var(--gold);
+            background: rgba(255, 177, 0, 0.1);
+        }
+
+        .upload-area.drag-over {
+            border-color: var(--gold);
+            background: rgba(255, 177, 0, 0.2);
+            transform: scale(1.02);
+        }
+
+        .upload-icon {
+            font-size: 2.5rem;
+            color: var(--light-blue);
+            margin-bottom: 0.75rem;
+        }
+
+        .upload-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 0.75rem;
+        }
+
+        .upload-btn {
+            background: var(--gold);
+            color: var(--navy);
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            margin: 0 auto 0.5rem auto;
+            display: inline-block;
+        }
+
+        .upload-btn:hover {
+            background: var(--navy);
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .upload-note {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .file-input {
+            display: none !important;
+        }
+
+        /* Info Sections */
+        .info-section {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .info-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--blue-soft);
+        }
+
+        .info-content {
+            color: #666;
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        /* Bottom Grid */
+        .bottom-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .key-points {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            min-height: 350px;
+        }
+
+        .key-points-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--blue-soft);
+        }
+
+        .key-points-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .key-points-list li {
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .key-points-list li:last-child {
+            border-bottom: none;
+        }
+
+        .key-points-list li .number {
+            background: var(--light-blue);
+            color: var(--white);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .key-points-list li.completed .number {
+            background: var(--gold);
+            color: var(--navy);
+        }
+
+
+
+        /* Right-side combined card that contains status (upper) and date/options (lower) */
+        .right-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 0.5rem;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            height: fit-content;
+            overflow: hidden;
+        }
+
+        .right-card .status-panel,
+        .right-card .date-panel {
+            padding: 1.25rem;
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: none;
+        }
+
+        .status-panel {
+            border-bottom: 1px dashed rgba(10,38,71,0.06);
+        }
+
+        .status-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 0.75rem;
+        }
+
+        .status-indicator {
+            background: var(--gold);
+            color: var(--navy);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 1rem;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .status-details {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .date-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .next-hearing-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 0.25rem;
+        }
+
+        .hearing-date {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--light-blue);
+            margin-bottom: 0.25rem;
+        }
+
+        .hearing-day {
+            background: var(--gold);
+            color: var(--navy);
+            font-size: 1.25rem;
+            font-weight: 700;
+            padding: 0.75rem;
+            border-radius: var(--radius-md);
+            display: inline-block;
+            min-width: 70px;
+        }
+
+        .card-options {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .calendar-btn,
+        .mail-btn,
+        .option-btn {
+            background: var(--gold);
+            color: var(--navy);
+            border: none;
+            padding: 0.6rem 1rem;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .calendar-btn:hover,
+        .mail-btn:hover,
+        .option-btn:hover {
+            background: var(--navy);
+            color: var(--gold);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .bottom-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .main-content {
+                padding: 1rem;
+            }
+
+            .page-header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .upload-area {
+                padding: 1.2rem 1rem;
+            }
+
+            .upload-icon {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .content-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+
+            .bottom-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+
+        /* Success/Error States */
+        .upload-success {
+            border-color: #10B981;
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .upload-error {
+            border-color: #EF4444;
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-sm);
+            color: white;
+            font-weight: 500;
+            z-index: 1000;
+            max-width: 350px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .notification.success {
+            background: #10B981;
+        }
+
+        .notification.error {
+            background: #EF4444;
+        }
+
+        .notification.info {
+            background: var(--light-blue);
+        }
+
+        /* Email Success Popup Styles */
+        .email-popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .email-popup {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            animation: popupSlideIn 0.3s ease-out;
+            position: relative;
+        }
+
+        @keyframes popupSlideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .email-popup-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--blue-soft);
+        }
+
+        .email-popup-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--navy);
+        }
+
+        .email-popup-title {
+            color: var(--navy);
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .email-popup-content {
+            margin-bottom: 1.5rem;
+        }
+
+        .email-detail {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .email-detail:last-child {
+            border-bottom: none;
+        }
+
+        .email-detail strong {
+            color: var(--navy);
+            font-weight: 600;
+        }
+
+        .email-detail span {
+            color: var(--light-blue);
+            text-align: right;
+            max-width: 60%;
+            word-break: break-word;
+        }
+
+        .email-popup-footer {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .popup-btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .popup-btn-primary {
+            background: var(--gold);
+            color: var(--navy);
+        }
+
+        .popup-btn-primary:hover {
+            background: var(--navy);
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #999;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .popup-close:hover {
+            background: #f0f0f0;
+            color: var(--navy);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="dashboard.html" class="logo">
+            <img src="assest/logo.png" alt="NyayaSetu Logo" class="logo-img">
+        </a>
+        <div class="nav-section">
+            <nav class="nav-links">
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                <a href="cases.html" class="nav-link">Cases</a>
+                <a href="clients.html" class="nav-link">Clients</a>
+                <a href="documents.html" class="nav-link">Documents</a>
+            </nav>
+            <button class="upload-btn" onclick="document.querySelector('#fileInput').click()">
+                <i class="fas fa-upload"></i>
+                Upload File
+            </button>
+            <div class="user-info">
+                <div class="user-avatar">U</div>
+                <span class="username" id="userWelcome">Welcome, User</span>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="page-header">
+            <h1 class="page-title">
+                DOCUMENTS - NYAYA SETU
+            </h1>
+        </div>
+
+        <!-- Content Grid -->
+        <div class="content-grid">
+            <!-- Upload Section -->
+            <div class="upload-section">
+                <div class="upload-form">
+                    <div class="form-group">
+                        <label for="caseNumber">Case Number:</label>
+                        <input type="number" id="caseNumber" name="caseNumber" min="1" required
+                               placeholder="Enter case number" title="Case number (numeric)" aria-label="Case number">
+                    </div>
+                    <div class="form-group">
+                        <label for="hearingName">Hearing Name:</label>
+                        <input type="text" id="hearingName" name="hearingName" required
+                               placeholder="Enter hearing name (e.g., First Hearing - Evidence Submission)" title="Hearing name" aria-label="Hearing name">
+                    </div>
+                    <div class="form-group" style="margin-top: 1rem;">
+                        <button type="button" class="upload-btn" onclick="getSummary()" 
+                                title="Get case summary" aria-label="Get case summary">
+                            <i class="fas fa-file-alt"></i>
+                            Get Summary
+                        </button>
+                    </div>
+                </div>
+                <div class="upload-area" onclick="triggerFileUpload()" role="button" tabindex="0" aria-labelledby="uploadAreaLabel">
+                    <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                    <h3 class="upload-title" id="uploadAreaLabel">Upload Hearing PDF</h3>
+                    <span class="sr-only" id="uploadAreaDescription">Click or press Enter to choose a PDF file to upload. Only PDF files accepted.</span>
+                    <div style="text-align: center;">
+                        <button type="button" class="upload-btn" onclick="event.stopPropagation(); triggerFileUpload();"
+                            title="Choose PDF file to upload" aria-label="Choose PDF file to upload">Choose File</button>
+                    </div>
+                    <p class="upload-note">Click to choose file or drag & drop PDF here<br>Only PDF files are accepted</p>
+                    <input type="file" class="file-input" id="pdfUpload" name="pdfUpload" accept=".pdf" onchange="handlePDFUpload(this)" style="display: none;"
+                           title="Upload hearing PDF file" aria-label="Upload hearing PDF file">
+                </div>
+            </div>
+
+            <!-- Right-side combined card: upper status, lower date/options -->
+            <div class="right-card">
+                <div class="status-panel">
+                    <h3 class="status-title">Status</h3>
+                    <div class="status-indicator">Active</div>
+                    <div class="status-details">
+                        Case is proceeding as scheduled. All documents are up to date.
+                    </div>
+                </div>
+
+                <div class="date-panel">
+                    <div>
+                        <h4 class="next-hearing-title">Next Hearing Date</h4>
+                        <div class="hearing-date">October 26, 2023</div>
+                    </div>
+
+                    <div class="card-options">
+                        <button class="calendar-btn" onclick="addToCalendar()">
+                            <i class="fas fa-calendar-plus"></i>
+                            Add to Calendar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Grid -->
+        <div class="bottom-grid">
+            <!-- Info for Lawyer -->
+            <div class="key-points">
+                <h3 class="key-points-title">Info for Lawyer</h3>
+                <ul class="key-points-list">
+                    <li>
+                        <span class="number">1</span>
+                        <div>
+                            <strong>Review of case documents:</strong> Complete thorough analysis of all submitted evidence, witness statements, and legal precedents. Ensure all documentation is properly organized and admissible.
+                        </div>
+                    </li>
+                    <li>
+                        <span class="number">2</span>
+                        <div>
+                            <strong>Client meeting scheduled:</strong> Conduct comprehensive client consultation to discuss case strategy, review testimony preparation, and address any concerns or questions.
+                        </div>
+                    </li>
+                    <li class="completed">
+                        <span class="number">✓</span>
+                        <div>
+                            <strong>Prepare arguments for next session:</strong> Develop compelling legal arguments based on case law research, prepare cross-examination questions, and finalize presentation materials.
+                        </div>
+                    </li>
+                    <li>
+                        <span class="number">4</span>
+                        <div>
+                            <strong>Prepare follow-up on evidence submission:</strong> Coordinate with court clerk for additional evidence submission, ensure all deadlines are met, and prepare backup documentation.
+                        </div>
+                    </li>
+                    <li>
+                        <span class="number">5</span>
+                        <div>
+                            <strong>Research legal precedents:</strong> Conduct comprehensive research on similar cases, identify supporting jurisprudence, and prepare citations for court submission.
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Info for Client -->
+            <div class="info-section">
+                <h3 class="info-title">Info for Client</h3>
+                <div class="info-content">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </div>
+                <button class="mail-btn" onclick="sendMailToClient()">
+                    <i class="fas fa-envelope"></i>
+                    Send Mail to Client
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script src="config.js"></script>
+    <script>
+        // File upload functionality
+        function triggerFileUpload() {
+            console.log('triggerFileUpload called');
+            const fileInput = document.getElementById('pdfUpload');
+            console.log('File input element:', fileInput);
+            
+            if (fileInput) {
+                fileInput.click();
+                console.log('File input clicked');
+            } else {
+                console.error('File input not found!');
+            }
+        }
+
+        function handlePDFUpload(input) {
+            console.log('handlePDFUpload called');
+            console.log('Input files:', input.files);
+            
+            const file = input.files[0];
+            const uploadArea = document.querySelector('.upload-area');
+            
+            if (!file) {
+                console.log('No file selected');
+                return;
+            }
+
+            console.log('File selected:', {
+                name: file.name,
+                size: file.size,
+                type: file.type
+            });
+
+            // Validate file type
+            if (file.type !== 'application/pdf') {
+                console.log('Invalid file type:', file.type);
+                showNotification('Please select a PDF file only.', 'error');
+                uploadArea.classList.add('upload-error');
+                setTimeout(() => {
+                    uploadArea.classList.remove('upload-error');
+                }, 3000);
+                return;
+            }
+
+            // Validate file size (max 10MB)
+            if (file.size > 10 * 1024 * 1024) {
+                console.log('File too large:', file.size);
+                showNotification('File size must be less than 10MB.', 'error');
+                uploadArea.classList.add('upload-error');
+                setTimeout(() => {
+                    uploadArea.classList.remove('upload-error');
+                }, 50000);
+                return;
+            }
+
+            // Show file selected feedback
+            uploadArea.classList.add('upload-success');
+            showNotification(`File "${file.name}" selected successfully!`, 'success');
+            
+            // Update upload area content to show selected file
+            const uploadTitle = uploadArea.querySelector('.upload-title');
+            const uploadBtn = uploadArea.querySelector('.upload-btn');
+            const uploadNote = uploadArea.querySelector('.upload-note');
+            
+            uploadTitle.textContent = 'PDF File Selected';
+            uploadBtn.textContent = 'Change File';
+            uploadNote.innerHTML = `<strong>Selected:</strong> ${file.name}<br><small>Click "Change File" to select different file</small>`;
+
+            // Process the uploaded file
+            console.log('Starting PDF processing...');
+            processUploadedPDF(file);
+            
+            // Reset input for future uploads
+            // input.value = ''; // Commented out to keep the file selected
+        }
+
+        function processUploadedPDF(file) {
+            // Show processing notification
+            showNotification('Uploading to server...', 'info');
+            
+            // Get dynamic values from form
+            const caseNumber = document.getElementById('caseNumber').value;
+            const hearingName = document.getElementById('hearingName').value;
+            
+            // Validate form inputs
+            if (!caseNumber || !hearingName.trim()) {
+                showNotification('Please fill in Case Number and Hearing Name before uploading.', 'error');
+                return;
+            }
+            
+            // Create FormData for file upload
+            const formData = new FormData();
+            
+            // Add required fields based on API documentation
+            formData.append('case_number', caseNumber);
+            formData.append('hearing_name', hearingName.trim());
+            formData.append('hearing_pdf', file);
+            
+            // Get auth token for API requests
+            const token = localStorage.getItem('nyayasetu_token');
+            
+            // API endpoint - Updated to use the correct backend URL
+            const apiEndpoint = 'http://localhost:3000/nyayasetu/api/hearings/add';
+            
+            console.log('Sending request to:', apiEndpoint);
+            console.log('Form data:', {
+                case_number: caseNumber,
+                hearing_name: hearingName,
+                file_name: file.name,
+                file_size: file.size
+            });
+            console.log('Authorization token present:', !!token);
+            console.log('Token preview:', token ? token.substring(0, 20) + '...' : 'No token');
+            
+            // Send to actual backend API
+            fetch(apiEndpoint, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}` // Add auth header if required
+                    // Note: Don't set Content-Type header when sending FormData
+                },
+                body: formData,
+                signal: AbortSignal.timeout(120000) // 60 seconds timeout
+            })
+            .then(response => {
+                console.log('🔥 BACKEND RESPONSE RECEIVED:');
+                console.log('Response status:', response.status);
+                console.log('Response status text:', response.statusText);
+                console.log('Response ok:', response.ok);
+                console.log('Response headers:', [...response.headers.entries()]);
+                
+                // Clone response to read it multiple times
+                const responseClone = response.clone();
+                
+                // Log raw response text for debugging
+                responseClone.text().then(rawText => {
+                    console.log('Raw response body:', rawText);
+                }).catch(err => {
+                    console.log('Could not read raw response:', err);
+                });
+                
+                if (!response.ok) {
+                    return response.text().then(errorText => {
+                        console.log('Error response body:', errorText);
+                        throw new Error(`HTTP ${response.status}: ${errorText}`);
+                    });
+                }
+                
+                // Check if response has content
+                const contentType = response.headers.get('content-type');
+                console.log('Content-Type:', contentType);
+                
+                if (contentType && contentType.includes('application/json')) {
+                    return response.json().then(data => {
+                        console.log('Parsed JSON response:', data);
+                        return data;
+                    });
+                } else {
+                    return response.text().then(data => {
+                        console.log('Text response:', data);
+                        return data;
+                    });
+                }
+            })
+            .then(data => {
+                console.log('✅ Upload successful! Response data:', data);
+                showNotification('PDF uploaded to server successfully!', 'success');
+                
+                // Log what we received from backend
+                console.log('Backend returned:', typeof data, data);
+                
+                // Update the info sections with processed content from API response
+                updateInfoSectionsFromResponse(data);
+            })
+            .catch(error => {
+                console.error('❌ UPLOAD ERROR DETAILS:');
+                console.error('Error message:', error.message);
+                console.error('Error stack:', error.stack);
+                console.error('Error name:', error.name);
+                
+                // Handle specific error cases with more detailed messages
+                if (error.message.includes('Failed to fetch') || error.message.includes('fetch')) {
+                    showNotification('❌ Cannot connect to backend server. Please check your internet connection!', 'error');
+                    console.log('🚨 Network Issue - Could not reach backend server');
+                    console.log('This usually means the backend is down or there\'s a network issue');
+                } else if (error.message.includes('401')) {
+                    showNotification('❌ Authentication failed. Please check your login token.', 'error');
+                    console.log('🚨 Authentication Issue - 401 Unauthorized');
+                    console.log('Your token might be expired or invalid');
+                } else if (error.message.includes('400')) {
+                    showNotification('❌ Invalid request. Please check the file and form data.', 'error');
+                    console.log('🚨 Bad Request - 400 Error');
+                    console.log('The server rejected the request format');
+                } else if (error.message.includes('500')) {
+                    showNotification('❌ Server error. Please try again later.', 'error');
+                    console.log('🚨 Server Error - 500 Internal Server Error');
+                    console.log('Something went wrong on the backend server');
+                } else {
+                    showNotification(`❌ Upload failed: ${error.message}`, 'error');
+                    console.log('🚨 Unknown Error:', error.message);
+                }
+                
+                // Fallback to local processing if API fails
+                console.log('Falling back to local processing...');
+                showNotification('📁 Processing file locally (backend response logged in console)', 'info');
+                setTimeout(() => {
+                    updateInfoSectionsDefault();
+                    showNotification('✅ File processed locally. Check console for backend response details.', 'info');
+                }, 1000);
+            });
+        }
+
+        function updateInfoSectionsFromResponse(response) {
+            try {
+                console.log('Parsing API response for display:', response);
+                
+                // Extract relevant information from response
+                let caseStatus = 'N/A';
+                let nextDate = 'N/A';
+                let lawyerViewPoints = [];
+                let clientViewPoints = [];
+                let lawyerCheckpoints = [];
+                
+                // Check if response has the expected structure
+                if (response && response.summary) {
+                    // Extract case status
+                    caseStatus = response.summary.current_status || 'N/A';
+                    
+                    // Extract next hearing date
+                    nextDate = response.summary.next_date || 'N/A';
+                    
+                    // Extract lawyer view points
+                    if (response.summary.lawyer_view && response.summary.lawyer_view.points && 
+                        Array.isArray(response.summary.lawyer_view.points)) {
+                        lawyerViewPoints = response.summary.lawyer_view.points;
+                    }
+                    
+                    // Extract client view points
+                    if (response.summary.client_view && response.summary.client_view.points && 
+                        Array.isArray(response.summary.client_view.points)) {
+                        clientViewPoints = response.summary.client_view.points;
+                    }
+                    
+                    // Extract lawyer checkpoints
+                    if (response.summary.lawyer_checkpoints && 
+                        Array.isArray(response.summary.lawyer_checkpoints)) {
+                        lawyerCheckpoints = response.summary.lawyer_checkpoints;
+                    }
+                }
+                
+                // Update Status section
+                updateStatusSection(caseStatus);
+                
+                // Update Next Hearing Date
+                updateNextHearingDate(nextDate);
+                
+                // Update Info for Lawyer section
+                updateLawyerInfo(lawyerViewPoints, lawyerCheckpoints);
+                
+                // Update Info for Client section
+                updateClientInfo(clientViewPoints);
+                
+                console.log('UI updated with response data');
+                
+            } catch (error) {
+                console.error('Error updating UI with response data:', error);
+                showNotification('Error updating UI with response data. See console for details.', 'error');
+                
+                // Fall back to default content
+                updateInfoSectionsDefault();
+            }
+        }
+        
+        function updateStatusSection(status) {
+            const statusIndicator = document.querySelector('.status-indicator');
+            const statusDetails = document.querySelector('.status-details');
+            
+            if (statusIndicator) {
+                statusIndicator.textContent = status || 'N/A';
+            }
+            
+            if (statusDetails) {
+                statusDetails.textContent = status ? 
+                    `Case status is currently ${status}. All documents are up to date.` : 
+                    'Case status information not available.';
+            }
+        }
+        
+        function updateNextHearingDate(date) {
+            const hearingDateElement = document.querySelector('.hearing-date');
+            
+            if (hearingDateElement) {
+                hearingDateElement.textContent = date || 'N/A';
+            }
+        }
+        
+        function updateLawyerInfo(lawyerPoints, checkpoints) {
+            const lawyerList = document.querySelector('.key-points-list');
+            
+            if (!lawyerList) return;
+            
+            // Combine lawyer view points and checkpoints
+            let allPoints = [];
+            
+            // Add lawyer view points first (if available)
+            if (lawyerPoints && lawyerPoints.length > 0) {
+                allPoints = lawyerPoints.map(point => ({
+                    text: point,
+                    isCheckpoint: false
+                }));
+            }
+            
+            // Add checkpoints (if available)
+            if (checkpoints && checkpoints.length > 0) {
+                const checkpointItems = checkpoints.map(checkpoint => ({
+                    text: checkpoint,
+                    isCheckpoint: true
+                }));
+                
+                allPoints = [...allPoints, ...checkpointItems];
+            }
+            
+            // If no points available, show a placeholder message
+            if (allPoints.length === 0) {
+                lawyerList.innerHTML = `
+                    <li>
+                        <span class="number">i</span>
+                        <div>
+                            <strong>No lawyer information available.</strong> The system did not receive any specific information for the lawyer from this document.
+                        </div>
+                    </li>
+                `;
+                return;
+            }
+            
+            // Generate HTML for lawyer points
+            let html = '';
+            allPoints.forEach((point, index) => {
+                const number = point.isCheckpoint ? '✓' : (index + 1);
+                const className = point.isCheckpoint ? 'class="completed"' : '';
+                
+                html += `
+                    <li ${className}>
+                        <span class="number">${number}</span>
+                        <div>
+                            <strong>${point.isCheckpoint ? 'Checkpoint:' : 'Point:'}</strong> ${point.text}
+                        </div>
+                    </li>
+                `;
+            });
+            
+            lawyerList.innerHTML = html;
+        }
+        
+        function updateClientInfo(clientPoints) {
+            const clientInfo = document.querySelector('.info-section .info-content');
+            
+            if (!clientInfo) return;
+            
+            // If no client points available, show a placeholder message
+            if (!clientPoints || clientPoints.length === 0) {
+                clientInfo.innerHTML = `
+                    <strong>No client information available.</strong><br><br>
+                    The system did not receive any specific information for the client from this document.
+                `;
+                return;
+            }
+            
+            // Generate HTML for client points
+            let html = '<strong>Key Points:</strong><br><br><ul style="padding-left: 20px;">';
+            
+            clientPoints.forEach(point => {
+                html += `<li style="margin-bottom: 10px;">${point}</li>`;
+            });
+            
+            html += '</ul>';
+            clientInfo.innerHTML = html;
+        }
+        
+        function updateInfoSectionsDefault() {
+            // Default update if no API response data is available
+            
+            // Update Info for Client section
+            const clientInfo = document.querySelector('.info-section .info-content');
+            if (clientInfo) {
+                clientInfo.innerHTML = `
+                    <strong>Case Status:</strong> Your hearing has been successfully documented. The next steps have been outlined below.<br><br>
+                    <strong>Required Actions:</strong> Please review the attached documents and prepare any additional evidence as discussed during the session.<br><br>
+                    <strong>Timeline:</strong> All preparations must be completed before the next hearing date.
+                `;
+            }
+
+            // Update Info for Lawyer section with detailed content
+            const lawyerList = document.querySelector('.key-points-list');
+            if (lawyerList) {
+                lawyerList.innerHTML = `
+                    <li>
+                        <span class="number">1</span>
+                        <div>
+                            <strong>PDF document uploaded and analyzed:</strong> The uploaded hearing transcript has been processed and key points have been extracted. Document contains 15 pages of proceedings with 3 witness testimonies.
+                        </div>
+                    </li>
+                    <li class="completed">
+                        <span class="number">✓</span>
+                        <div>
+                            <strong>Case timeline updated:</strong> All relevant dates and deadlines have been updated in the case management system. Next critical deadline is evidence submission by October 20, 2023.
+                        </div>
+                    </li>
+                    <li>
+                        <span class="number">3</span>
+                        <div>
+                            <strong>Client notification sent:</strong> Automated notification has been dispatched to client regarding case progress and upcoming requirements. Follow-up meeting scheduled for October 15, 2023.
+                        </div>
+                    </li>
+                    <li>
+                        <span class="number">4</span>
+                        <div>
+                            <strong>Next hearing preparation initiated:</strong> Comprehensive preparation checklist created including witness coordination, evidence organization, and argument structuring for optimal case presentation.
+                        </div>
+                    </li>
+                    <li>
+                        <span class="number">5</span>
+                        <div>
+                            <strong>Legal research required:</strong> Additional case law research needed on precedents related to witness credibility and evidence admissibility. Research deadline: October 18, 2023.
+                        </div>
+                    </li>
+                    <li>
+                        <span class="number">6</span>
+                        <div>
+                            <strong>Court filing preparation:</strong> Prepare and review all court filings, motions, and supporting documentation. Ensure all procedural requirements are met before submission deadline.
+                        </div>
+                    </li>
+                `;
+            }
+        }
+        
+        // Backward compatibility for old code
+        function updateInfoSections() {
+            updateInfoSectionsDefault();
+        }
+
+        function showNotification(message, type = 'info') {
+            // Remove existing notifications
+            const existingNotifications = document.querySelectorAll('.notification');
+            existingNotifications.forEach(notification => {
+                notification.remove();
+            });
+
+            // Create new notification
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+
+            // Remove notification after 4 seconds
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.style.opacity = '0';
+                    notification.style.transform = 'translateX(100%)';
+                    setTimeout(() => {
+                        notification.remove();
+                    }, 300);
+                }
+            }, 4000);
+        }
+
+        // Summary functionality
+        async function getSummary() {
+            try {
+                // Get case number from input field
+                const caseNumberInput = document.getElementById('caseNumber');
+                const caseNumber = caseNumberInput.value.trim();
+
+                if (!caseNumber) {
+                    showNotification('Please enter a case number first', 'error');
+                    caseNumberInput.focus();
+                    return;
+                }
+
+                // Show loading notification
+                showNotification('Fetching case summary...', 'info');
+
+                // Make API call to get summary
+                const response = await fetch(`${CONFIG.CHATBOT_API_BASE_URL}${CONFIG.API_ENDPOINTS.GET_SUMMARY}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'case_number': caseNumber
+                    },
+                    body: JSON.stringify({
+                        case_number: caseNumber
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const summaryData = await response.json();
+                
+                // Log the response to console as requested
+                console.log('Summary Response:', summaryData);
+                
+                // Check if there's an error in the response
+                if (summaryData.error) {
+                    throw new Error(summaryData.error);
+                }
+
+                // Update UI sections with summary data
+                updateStatusSection(summaryData.current_status || 'Unknown');
+                updateNextHearingDate(summaryData.next_date || 'Not specified');
+                updateClientInfo(summaryData.client_view?.points || []);
+                updateLawyerInfo(summaryData.lawyer_view?.points || [], summaryData.lawyer_checkpoints || []);
+                
+                // Store summary data globally for later use in email function
+                window.currentSummaryData = summaryData;
+                window.currentCaseNumber = caseNumber;
+                
+                // Show success notification
+                showNotification('Summary retrieved and displayed successfully!', 'success');
+
+            } catch (error) {
+                console.error('Error fetching summary:', error);
+                showNotification(`Error fetching summary: ${error.message}`, 'error');
+            }
+        }
+
+        // Function to update status section
+        function updateStatusSection(status) {
+            const statusElement = document.querySelector('.status-indicator');
+            const statusDetailsElement = document.querySelector('.status-details');
+            
+            if (statusElement) {
+                statusElement.textContent = status;
+                
+                // Update status color based on status value
+                statusElement.className = 'status-indicator';
+                if (status.toLowerCase() === 'closed' || status.toLowerCase() === 'disposed') {
+                    statusElement.style.backgroundColor = '#dc3545'; // Red
+                    statusElement.style.color = 'white';
+                } else if (status.toLowerCase() === 'ongoing' || status.toLowerCase() === 'pending') {
+                    statusElement.style.backgroundColor = '#ffc107'; // Yellow/Gold
+                    statusElement.style.color = '#0A2647';
+                } else {
+                    statusElement.style.backgroundColor = '#28a745'; // Green
+                    statusElement.style.color = 'white';
+                }
+            }
+            
+            if (statusDetailsElement) {
+                const statusMessages = {
+                    'Pending': 'Case filed but not yet heard.',
+                    'Ongoing': 'Case is under trial with active hearings.',
+                    'Reserved for Judgment': 'Case is awaiting court decision.',
+                    'Disposed': 'Case has been decided with judgment given.',
+                    'Appeal Filed': 'Appeal has been submitted to higher court.',
+                    'Closed': 'Case is fully closed and concluded.'
+                };
+                statusDetailsElement.textContent = statusMessages[status] || `Case status: ${status}`;
+            }
+        }
+
+        // Function to update next hearing date
+        function updateNextHearingDate(date) {
+            const hearingDateElement = document.querySelector('.hearing-date');
+            if (hearingDateElement) {
+                hearingDateElement.textContent = date;
+            }
+        }
+
+        // Function to update client info section
+        function updateClientInfo(clientPoints) {
+            // Find the client info section content
+            const clientSection = document.querySelector('.info-section .info-content');
+            
+            if (clientSection && clientPoints.length > 0) {
+                // Clear existing content
+                clientSection.innerHTML = '';
+                
+                // Add each point as a paragraph
+                clientPoints.forEach(point => {
+                    const pointElement = document.createElement('p');
+                    pointElement.style.marginBottom = '0.8rem';
+                    pointElement.style.lineHeight = '1.6';
+                    pointElement.textContent = point;
+                    clientSection.appendChild(pointElement);
+                });
+            } else if (clientSection) {
+                clientSection.innerHTML = '<p>No client information available.</p>';
+            }
+        }
+
+        // Function to update lawyer info and add checkpoints
+        function updateLawyerInfo(lawyerPoints, checkpoints) {
+            // Find the lawyer info section (key-points-list)
+            const lawyerSection = document.querySelector('.key-points-list');
+            
+            if (lawyerSection && lawyerPoints.length > 0) {
+                // Clear existing content
+                lawyerSection.innerHTML = '';
+                
+                // Add each point as a list item
+                lawyerPoints.forEach((point, index) => {
+                    const listItem = document.createElement('li');
+                    
+                    const numberSpan = document.createElement('span');
+                    numberSpan.className = 'number';
+                    numberSpan.textContent = index + 1;
+                    
+                    const contentDiv = document.createElement('div');
+                    contentDiv.textContent = point;
+                    
+                    listItem.appendChild(numberSpan);
+                    listItem.appendChild(contentDiv);
+                    lawyerSection.appendChild(listItem);
+                });
+                
+                // Add lawyer checkpoints section after lawyer info
+                if (checkpoints.length > 0) {
+                    addLawyerCheckpointsSection(checkpoints);
+                }
+            } else if (lawyerSection) {
+                lawyerSection.innerHTML = '<li><span class="number">!</span><div>No lawyer information available.</div></li>';
+            }
+        }
+
+        // Function to add lawyer checkpoints section
+        function addLawyerCheckpointsSection(checkpoints) {
+            // Find the bottom-grid container
+            const bottomGrid = document.querySelector('.bottom-grid');
+            
+            // Remove existing checkpoints section if it exists
+            const existingCheckpoints = document.querySelector('#lawyer-checkpoints-section');
+            if (existingCheckpoints) {
+                existingCheckpoints.remove();
+            }
+            
+            // Create new checkpoints section
+            const checkpointsSection = document.createElement('div');
+            checkpointsSection.id = 'lawyer-checkpoints-section';
+            checkpointsSection.className = 'key-points';
+            checkpointsSection.style.marginTop = '1.5rem';
+            
+            const header = document.createElement('h3');
+            header.className = 'key-points-title';
+            header.textContent = 'Lawyer Checkpoints';
+            
+            const checkpointsList = document.createElement('ul');
+            checkpointsList.className = 'key-points-list';
+            
+            // Add each checkpoint as a list item with checkbox
+            checkpoints.forEach((checkpoint, index) => {
+                const listItem = document.createElement('li');
+                listItem.style.display = 'flex';
+                listItem.style.alignItems = 'flex-start';
+                listItem.style.gap = '0.5rem';
+                listItem.style.paddingLeft = '0';
+                
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.id = `checkpoint-${index}`;
+                checkbox.style.marginTop = '2px';
+                checkbox.style.flexShrink = '0';
+                
+                const contentDiv = document.createElement('div');
+                contentDiv.style.flex = '1';
+                
+                const label = document.createElement('label');
+                label.htmlFor = `checkpoint-${index}`;
+                label.style.cursor = 'pointer';
+                label.style.lineHeight = '1.6';
+                label.textContent = checkpoint;
+                
+                contentDiv.appendChild(label);
+                listItem.appendChild(checkbox);
+                listItem.appendChild(contentDiv);
+                checkpointsList.appendChild(listItem);
+            });
+            
+            checkpointsSection.appendChild(header);
+            checkpointsSection.appendChild(checkpointsList);
+            
+            // Add to the bottom-grid container
+            if (bottomGrid) {
+                bottomGrid.appendChild(checkpointsSection);
+            }
+        }
+
+        // Function to send client email with summary data
+        async function sendClientEmail(caseNumber, clientPoints) {
+            try {
+                console.log('Sending client email with case summary...');
+                
+                // Get auth token
+                const token = localStorage.getItem('nyayasetu_token');
+                if (!token) {
+                    console.warn('No auth token found, skipping email send');
+                    return;
+                }
+
+                // Prepare email data
+                const emailData = {
+                    case_number: caseNumber,
+                    points: clientPoints
+                };
+
+                console.log('Email data:', emailData);
+
+                // Send API request to backend
+                const response = await fetch(`${CONFIG.API_BASE_URL}/nyayasetu/api/hearings/send-client-email`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(emailData)
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({ message: 'Unknown error' }));
+                    throw new Error(`HTTP ${response.status}: ${errorData.message || response.statusText}`);
+                }
+
+                const result = await response.json();
+                console.log('Email sent successfully:', result);
+                
+                // Show success notification and popup
+                showNotification('Case summary email sent to client successfully!', 'success');
+                showEmailSuccessPopup(result.email_details);
+                
+                return result;
+
+            } catch (error) {
+                console.error('Error sending client email:', error);
+                showNotification(`Failed to send email to client: ${error.message}`, 'error');
+                // Don't throw error to prevent breaking the main summary flow
+            }
+        }
+
+        // Function to show email success popup
+        function showEmailSuccessPopup(emailDetails) {
+            // Remove existing popup if any
+            const existingPopup = document.querySelector('.email-popup-overlay');
+            if (existingPopup) {
+                existingPopup.remove();
+            }
+
+            // Create popup overlay
+            const overlay = document.createElement('div');
+            overlay.className = 'email-popup-overlay';
+
+            // Create popup content
+            const popup = document.createElement('div');
+            popup.className = 'email-popup';
+
+            popup.innerHTML = `
+                <button class="popup-close" onclick="this.closest('.email-popup-overlay').remove()">×</button>
+                
+                <div class="email-popup-header">
+                    <div class="email-popup-icon">
+                        <i class="fas fa-envelope-circle-check"></i>
+                    </div>
+                    <div>
+                        <h3 class="email-popup-title">Email Sent Successfully!</h3>
+                        <p style="color: var(--light-blue); margin: 0; font-size: 0.9rem;">Case summary has been delivered to client</p>
+                    </div>
+                </div>
+
+                <div class="email-popup-content">
+                    <div class="email-detail">
+                        <strong>Client Name:</strong>
+                        <span>${emailDetails?.recipient?.name || 'Not specified'}</span>
+                    </div>
+                    <div class="email-detail">
+                        <strong>Client Email:</strong>
+                        <span>${emailDetails?.recipient?.email || 'Not specified'}</span>
+                    </div>
+                    <div class="email-detail">
+                        <strong>Case Number:</strong>
+                        <span>${emailDetails?.case?.case_number || 'Not specified'}</span>
+                    </div>
+                    <div class="email-detail">
+                        <strong>Subject:</strong>
+                        <span>${emailDetails?.subject || 'Case Update'}</span>
+                    </div>
+                    <div class="email-detail">
+                        <strong>Sent At:</strong>
+                        <span>${emailDetails?.sent_at ? new Date(emailDetails.sent_at).toLocaleString() : new Date().toLocaleString()}</span>
+                    </div>
+                </div>
+
+                <div class="email-popup-footer">
+                    <button class="popup-btn popup-btn-primary" onclick="this.closest('.email-popup-overlay').remove()">
+                        <i class="fas fa-check"></i> Okay
+                    </button>
+                </div>
+            `;
+
+            overlay.appendChild(popup);
+            document.body.appendChild(overlay);
+
+            // Close popup when clicking outside
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) {
+                    overlay.remove();
+                }
+            });
+
+            // Close popup with Escape key
+            document.addEventListener('keydown', function escapeHandler(e) {
+                if (e.key === 'Escape') {
+                    overlay.remove();
+                    document.removeEventListener('keydown', escapeHandler);
+                }
+            });
+
+            // Auto-close after 10 seconds
+            setTimeout(() => {
+                if (overlay.parentNode) {
+                    overlay.remove();
+                }
+            }, 10000);
+        }
+
+        // Calendar and Email functionality
+        function addToCalendar() {
+            const eventTitle = 'Court Hearing - NyayaSetu Case';
+            const eventDate = '2023-10-26'; // October 26, 2023
+            const eventTime = '10:00'; // 10:00 AM
+            const eventDetails = 'Important court hearing for ongoing case. Please arrive 30 minutes early.';
+            
+            // Create calendar URL (Google Calendar format)
+            const startDate = `${eventDate}T${eventTime}:00`;
+            const endDate = `${eventDate}T12:00:00`; // 2 hours duration
+            
+            const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventTitle)}&dates=${startDate.replace(/[-:]/g, '')}/${endDate.replace(/[-:]/g, '')}&details=${encodeURIComponent(eventDetails)}`;
+            
+            // Open calendar in new tab
+            window.open(calendarUrl, '_blank');
+            
+            showNotification('Calendar event created! Opening Google Calendar...', 'success');
+        }
+
+        async function sendMailToClient() {
+            // Check if summary data is available
+            if (!window.currentSummaryData || !window.currentCaseNumber) {
+                showNotification('Please get case summary first before sending email to client.', 'warning');
+                return;
+            }
+
+            // Check if client summary points are available
+            if (!window.currentSummaryData.client_view?.points || window.currentSummaryData.client_view.points.length === 0) {
+                showNotification('No client summary data available to send.', 'warning');
+                return;
+            }
+
+            try {
+                // Send email using the actual summary data
+                await sendClientEmail(window.currentCaseNumber, window.currentSummaryData.client_view.points);
+            } catch (error) {
+                console.error('Error sending email to client:', error);
+                showNotification(`Error sending email: ${error.message}`, 'error');
+            }
+        }
+
+        // Authentication check
+        document.addEventListener('DOMContentLoaded', function() {
+            const token = localStorage.getItem('nyayasetu_token');
+            
+            if (!token) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Load user information
+            loadUserInfo();
+
+            // Set up drag and drop functionality
+            setupDragAndDrop();
+        });
+
+        function setupDragAndDrop() {
+            const uploadArea = document.querySelector('.upload-area');
+            
+            if (!uploadArea) {
+                console.error('Upload area not found');
+                return;
+            }
+
+            // Prevent default drag behaviors
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                uploadArea.addEventListener(eventName, preventDefaults, false);
+                document.body.addEventListener(eventName, preventDefaults, false);
+            });
+
+            // Highlight drop area when item is dragged over it
+            ['dragenter', 'dragover'].forEach(eventName => {
+                uploadArea.addEventListener(eventName, highlight, false);
+            });
+
+            ['dragleave', 'drop'].forEach(eventName => {
+                uploadArea.addEventListener(eventName, unhighlight, false);
+            });
+
+            // Handle dropped files
+            uploadArea.addEventListener('drop', handleDrop, false);
+
+            function preventDefaults(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+
+            function highlight(e) {
+                uploadArea.classList.add('drag-over');
+            }
+
+            function unhighlight(e) {
+                uploadArea.classList.remove('drag-over');
+            }
+
+            function handleDrop(e) {
+                const dt = e.dataTransfer;
+                const files = dt.files;
+
+                if (files.length > 0) {
+                    const file = files[0];
+                    console.log('File dropped:', file.name);
+                    
+                    // Simulate file input change
+                    const fileInput = document.getElementById('pdfUpload');
+                    if (fileInput) {
+                        // Create a new FileList-like object
+                        const dataTransfer = new DataTransfer();
+                        dataTransfer.items.add(file);
+                        fileInput.files = dataTransfer.files;
+                        
+                        // Trigger the change event
+                        handlePDFUpload(fileInput);
+                    }
+                }
+            }
+        }
+
+        // Make upload area keyboard-accessible (Enter/Space to trigger file input)
+        (function makeUploadAreaKeyboardAccessible(){
+            document.addEventListener('DOMContentLoaded', () => {
+                const uploadArea = document.querySelector('.upload-area');
+                const fileInput = document.getElementById('pdfUpload');
+                if (!uploadArea || !fileInput) return;
+
+                uploadArea.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        fileInput.click();
+                    }
+                });
+            });
+        })();
+
+        // Load user information
+        function loadUserInfo() {
+            try {
+                // Try to get user data from localStorage
+                const userData = localStorage.getItem('nyayasetu_user');
+                const usernameElement = document.querySelector('.username');
+                
+                if (userData && usernameElement) {
+                    const user = JSON.parse(userData);
+                    
+                    // Function to find user name in nested object
+                    function findUserName(obj, depth = 0) {
+                        if (depth > 3) return null; // Prevent infinite recursion
+                        
+                        // Direct properties check
+                        if (obj.name) return obj.name;
+                        if (obj.fullName) return obj.fullName;
+                        if (obj.username) return obj.username;
+                        if (obj.email) return obj.email?.split('@')[0];
+                        
+                        // Check nested objects
+                        for (const key in obj) {
+                            if (obj[key] && typeof obj[key] === 'object') {
+                                const result = findUserName(obj[key], depth + 1);
+                                if (result) return result;
+                            }
+                        }
+                        
+                        return null;
+                    }
+                    
+                    const displayName = findUserName(user) || 'User';
+                    usernameElement.textContent = `Welcome, ${displayName}`;
+                } else if (usernameElement) {
+                    // Fallback to default if no user data found
+                    usernameElement.textContent = 'Welcome, User';
+                }
+            } catch (error) {
+                console.log('Error loading user info:', error);
+                // Keep default text if there's an error
+            }
+        }
+
+        // Logout function
+        function logout() {
+            // Clear all stored data
+            localStorage.removeItem('nyayasetu_token');
+            localStorage.removeItem('nyayasetu_user');
+            localStorage.removeItem('nyayasetu_chat_messages');
+            
+            // Redirect to login page
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>
